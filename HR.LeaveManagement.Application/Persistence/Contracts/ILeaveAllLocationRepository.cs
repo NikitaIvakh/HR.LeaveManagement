@@ -1,6 +1,8 @@
-﻿namespace HR.LeaveManagement.Application.Persistence.Contracts
+﻿using HR.LeaveManagement.Domain;
+
+namespace HR.LeaveManagement.Application.Persistence.Contracts
 {
-    public interface ILeaveAllLocationRepository : IGeneticRepository<ILeaveAllLocationRepository>
+    public interface ILeaveAllLocationRepository : IGeneticRepository<LeaveAllLocation>
     {
 
     }
