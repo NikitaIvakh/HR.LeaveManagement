@@ -1,12 +1,10 @@
-﻿namespace HR.LeaveManagement.Domain
+﻿using HR.LeaveManagement.Domain.Common;
+
+namespace HR.LeaveManagement.Domain
 {
-    public class LeaveAllLocation
+    public class LeaveAllLocation : BaseDomainEntity
     {
-        public int Id { get; set; }
-
         public int NumbersOfDays { get; set; }
-
-        public DateTime DateCreated { get; set; }
 
         public LeaveType LeaveType { get; set; }
 
