@@ -1,4 +1,5 @@
 ﻿using HR.LeaveManagement.Application.DTOs.Common;
+using HR.LeaveManagement.Application.DTOs.LeaveType;
 
 namespace HR.LeaveManagement.Application.DTOs.LeaveRequest
 {
@@ -16,7 +17,7 @@ namespace HR.LeaveManagement.Application.DTOs.LeaveRequest
 
         public string RequestComments { get; set; }
 
-        public DateTime DateActioned { get; set; }
+        public DateTime? DateActioned { get; set; }
 
         public bool? Approved { get; set; }
 

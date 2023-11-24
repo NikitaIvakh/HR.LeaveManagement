@@ -1,12 +1,10 @@
 ﻿using HR.LeaveManagement.Application.DTOs.Common;
 
-namespace HR.LeaveManagement.Application.DTOs
+namespace HR.LeaveManagement.Application.DTOs.LeaveAllLocation
 {
-    public class LeaveAllLocationDto : BaseDto
+    public class CreateLeaveAllLocationDto : BaseDto
     {
         public int NumbersOfDays { get; set; }
-
-        public LeaveTypeDto LeaveType { get; set; }
 
         public int LeaveTypeId { get; set; }
 

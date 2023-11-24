@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using AutoMapper;
-using HR.LeaveManagement.Application.DTOs;
 using HR.LeaveManagement.Application.Persistence.Contracts;
 using HR.LeaveManagement.Application.Features.LeaveTypes.Requests.Queries;
+using HR.LeaveManagement.Application.DTOs.LeaveType;
 
 namespace HR.LeaveManagement.Application.Features.LeaveTypes.Handlers.Queries
 {
