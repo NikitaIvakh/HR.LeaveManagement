@@ -1,8 +1,6 @@
-﻿using HR.LeaveManagement.Application.DTOs.Common;
-
-namespace HR.LeaveManagement.Application.DTOs.LeaveAllLocation
+﻿namespace HR.LeaveManagement.Application.DTOs.LeaveAllLocation
 {
-    public class CreateLeaveAllLocationDto : BaseDto
+    public class CreateLeaveAllLocationDto
     {
         public int NumbersOfDays { get; set; }
 
