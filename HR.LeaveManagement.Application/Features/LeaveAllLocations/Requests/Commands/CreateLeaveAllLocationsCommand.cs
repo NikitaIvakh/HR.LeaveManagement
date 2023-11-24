@@ -5,6 +5,6 @@ namespace HR.LeaveManagement.Application.Features.LeaveAllLocations.Requests.Com
 {
     public class CreateLeaveAllLocationsCommand : IRequest<int>
     {
-        public LeaveAllLocationDto LeaveAllLocationDto { get; set; }
+        public CreateLeaveAllLocationDto LeaveAllLocationDto { get; set; }
     }
 }
