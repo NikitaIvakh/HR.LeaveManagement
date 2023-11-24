@@ -4,7 +4,7 @@ using HR.LeaveManagement.Application.Persistence.Contracts;
 using HR.LeaveManagement.Domain;
 using MediatR;
 
-namespace HR.LeaveManagement.Application.Features.LeaveAllLocations.Handlers
+namespace HR.LeaveManagement.Application.Features.LeaveAllLocations.Handlers.Commands
 {
     public class CreateLeaveAllLocationsCommandHandler : IRequestHandler<CreateLeaveAllLocationsCommand, int>
     {
