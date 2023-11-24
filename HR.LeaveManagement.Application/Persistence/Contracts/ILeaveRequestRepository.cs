@@ -4,6 +4,8 @@ namespace HR.LeaveManagement.Application.Persistence.Contracts
 {
     public interface ILeaveRequestRepository : IGeneticRepository<LeaveRequest>
     {
+        Task<LeaveRequest> GetLeaveRequestWithDetails(int id);
 
+        Task<List<LeaveRequest>> GetLeaveRequestsWithDetails();
     }
 }
