@@ -20,8 +20,6 @@
     <Folder Include="Features\LeaveAllLocations\Requests\Commands\" />
     <Folder Include="Features\LeaveRequess\Handlers\Commands\" />
     <Folder Include="Features\LeaveRequess\Requests\Commands\" />
-    <Folder Include="Features\LeaveTypes\Handlers\Commands\" />
-    <Folder Include="Features\LeaveTypes\Requests\Commands\" />
   </ItemGroup>
 
 </Project>
