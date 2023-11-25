@@ -2,7 +2,7 @@
 
 namespace HR.LeaveManagement.Application.DTOs.LeaveAllLocation
 {
-    public class UpdateLeaveAllLocationDto : BaseDto
+    public class UpdateLeaveAllLocationDto : BaseDto, ILeaveAllLocationDto
     {
         public int NumbersOfDays { get; set; }
 

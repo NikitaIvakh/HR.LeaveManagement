@@ -3,14 +3,16 @@ using HR.LeaveManagement.Application.Persistence.Contracts;
 
 namespace HR.LeaveManagement.Application.DTOs.LeaveAllLocation.Validators
 {
-    public class CreateLeaveAllLocationDtoValidator : AbstractValidator<CreateLeaveAllLocationDto>
+    public class UpdateLeaveAllLocationDtoValidator : AbstractValidator<UpdateLeaveAllLocationDto>
     {
         private readonly ILeaveAllLocationRepository _leaveAllLocationRepository;
 
-        public CreateLeaveAllLocationDtoValidator(ILeaveAllLocationRepository leaveAllLocationRepository)
+        public UpdateLeaveAllLocationDtoValidator(ILeaveAllLocationRepository leaveAllLocationRepository)
         {
             _leaveAllLocationRepository = leaveAllLocationRepository;
             Include(new ILeaveAllLocationDtoValidator(_leaveAllLocationRepository));
+
+            RuleFor(p => p.Id).NotNull().WithMessage("{PropertyName} must be present");
         }
     }
 }

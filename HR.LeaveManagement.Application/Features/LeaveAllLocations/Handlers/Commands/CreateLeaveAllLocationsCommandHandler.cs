@@ -20,7 +20,7 @@ namespace HR.LeaveManagement.Application.Features.LeaveAllLocations.Handlers.Com
 
         public async Task<int> Handle(CreateLeaveAllLocationsCommand request, CancellationToken cancellationToken)
         {
-            var validator = new CreateLeaveAllLocationDtoValidator();
+            var validator = new CreateLeaveAllLocationDtoValidator(_leaveAllLocationRepository);
             var validationResult = await validator.ValidateAsync(request.LeaveAllLocationDto, cancellationToken);
 
             if (validationResult.IsValid is false)

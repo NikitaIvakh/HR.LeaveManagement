@@ -1,6 +1,6 @@
 ﻿namespace HR.LeaveManagement.Application.DTOs.LeaveAllLocation
 {
-    public class CreateLeaveAllLocationDto : ILeaveAllLocationDto
+    public interface ILeaveAllLocationDto
     {
         public int NumbersOfDays { get; set; }
 
