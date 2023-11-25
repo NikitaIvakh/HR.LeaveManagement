@@ -7,7 +7,7 @@ namespace HR.LeaveManagement.Application.Features.LeaveRequess.Requests.Commands
     {
         public int Id { get; set; }
 
-        public LeaveRequestDto LeaveRequest { get; set; }
+        public UpdateLeaveRequestDto LeaveRequest { get; set; }
 
         public ChangeLeaveRequestApplovalDto ChangeLeaveRequestApploval { get; set; }
     }
