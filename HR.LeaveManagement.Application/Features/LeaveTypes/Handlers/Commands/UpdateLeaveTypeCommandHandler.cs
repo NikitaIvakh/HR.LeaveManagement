@@ -3,6 +3,7 @@ using HR.LeaveManagement.Application.DTOs.LeaveType.Validator;
 using HR.LeaveManagement.Application.Exceptions;
 using HR.LeaveManagement.Application.Features.LeaveTypes.Requests.Commands;
 using HR.LeaveManagement.Application.Persistence.Contracts;
+using HR.LeaveManagement.Domain;
 using MediatR;
 
 namespace HR.LeaveManagement.Application.Features.LeaveTypes.Handlers.Commands
@@ -26,10 +27,8 @@ namespace HR.LeaveManagement.Application.Features.LeaveTypes.Handlers.Commands
             if (validatorResult.IsValid is false)
                 throw new ValidationException(validatorResult);
 
-            var leaveType = await _leaveTypeRepository.GetAsync(request.LeaveTypeDto.Id);
-
-            if (leaveType is null)
-                throw new NotFoundException(nameof(leaveType), request.LeaveTypeDto.Id);
+            var leaveType = await _leaveTypeRepository.GetAsync(request.LeaveTypeDto.Id) 
+                ?? throw new NotFoundException(nameof(LeaveType), request.LeaveTypeDto.Id);
 
             _mapper.Map(request.LeaveTypeDto, leaveType);
             await _leaveTypeRepository.UpdateAsync(leaveType);

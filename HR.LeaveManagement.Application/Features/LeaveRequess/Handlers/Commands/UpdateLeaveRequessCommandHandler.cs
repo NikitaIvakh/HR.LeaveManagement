@@ -3,6 +3,7 @@ using HR.LeaveManagement.Application.DTOs.LeaveRequest.Validators;
 using HR.LeaveManagement.Application.Exceptions;
 using HR.LeaveManagement.Application.Features.LeaveRequess.Requests.Commands;
 using HR.LeaveManagement.Application.Persistence.Contracts;
+using HR.LeaveManagement.Domain;
 using MediatR;
 
 namespace HR.LeaveManagement.Application.Features.LeaveRequess.Handlers.Commands
@@ -20,10 +21,8 @@ namespace HR.LeaveManagement.Application.Features.LeaveRequess.Handlers.Commands
 
         public async Task<Unit> Handle(UpdateLeaveRequessCommand request, CancellationToken cancellationToken)
         {
-            var leaveRequest = await _leaveRequestRepository.GetAsync(request.Id);
-
-            if (leaveRequest is null)
-                throw new NotFoundException(nameof(leaveRequest), request.LeaveRequest.Id);
+            var leaveRequest = await _leaveRequestRepository.GetAsync(request.Id) 
+                ?? throw new NotFoundException(nameof(LeaveRequest), request.LeaveRequest.Id);
 
             var validator = new UpdateLeaveRequestDtoValidator(_leaveRequestRepository);
             var validatorResult = await validator.ValidateAsync(request.LeaveRequest, cancellationToken);

@@ -1,6 +1,7 @@
 ﻿using HR.LeaveManagement.Application.Exceptions;
 using HR.LeaveManagement.Application.Features.LeaveTypes.Requests.Commands;
 using HR.LeaveManagement.Application.Persistence.Contracts;
+using HR.LeaveManagement.Domain;
 using MediatR;
 
 namespace HR.LeaveManagement.Application.Features.LeaveRequess.Handlers.Commands
@@ -16,10 +17,8 @@ namespace HR.LeaveManagement.Application.Features.LeaveRequess.Handlers.Commands
 
         public async Task<Unit> Handle(DeleteLeaveTypeCommand request, CancellationToken cancellationToken)
         {
-            var leaveRequest = await _leaveRequestRepository.GetAsync(request.Id);
-
-            if (leaveRequest is null)
-                throw new NotFoundException(nameof(leaveRequest), request.Id);
+            var leaveRequest = await _leaveRequestRepository.GetAsync(request.Id) 
+                ?? throw new NotFoundException(nameof(LeaveRequest), request.Id);
 
             await _leaveRequestRepository.DeleteAsync(leaveRequest);
 

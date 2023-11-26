@@ -1,6 +1,7 @@
 ﻿using HR.LeaveManagement.Application.Exceptions;
 using HR.LeaveManagement.Application.Features.LeaveAllLocations.Requests.Commands;
 using HR.LeaveManagement.Application.Persistence.Contracts;
+using HR.LeaveManagement.Domain;
 using MediatR;
 
 namespace HR.LeaveManagement.Application.Features.LeaveAllLocations.Handlers.Commands
@@ -16,13 +17,10 @@ namespace HR.LeaveManagement.Application.Features.LeaveAllLocations.Handlers.Com
 
         public async Task<Unit> Handle(DeleteLeaveAllLocationsCommand request, CancellationToken cancellationToken)
         {
-            var leaveAllLocation = await _leaveAllLocationRepository.GetAsync(request.Id);
-
-            if (leaveAllLocation == null)
-                throw new NotFoundException(nameof(leaveAllLocation), request.Id);
+            var leaveAllLocation = await _leaveAllLocationRepository.GetAsync(request.Id) 
+                ?? throw new NotFoundException(nameof(LeaveAllLocation), request.Id);
 
             await _leaveAllLocationRepository.DeleteAsync(leaveAllLocation);
-
             return Unit.Value;
         }
     }
