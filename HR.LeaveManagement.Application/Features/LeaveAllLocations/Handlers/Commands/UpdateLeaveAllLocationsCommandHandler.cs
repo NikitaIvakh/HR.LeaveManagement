@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HR.LeaveManagement.Application.DTOs.LeaveAllLocation.Validators;
+using HR.LeaveManagement.Application.Exceptions;
 using HR.LeaveManagement.Application.Features.LeaveAllLocations.Requests.Commands;
 using HR.LeaveManagement.Application.Persistence.Contracts;
 using MediatR;
@@ -23,9 +24,13 @@ namespace HR.LeaveManagement.Application.Features.LeaveAllLocations.Handlers.Com
             var validatorResult = await validator.ValidateAsync(request.LeaveAllLocationDto, cancellationToken);
 
             if (validatorResult.IsValid is false)
-                throw new Exception();
+                throw new ValidationException(validatorResult);
 
             var leaveAllLocation = await _leaveAllLocationRepository.GetAsync(request.LeaveAllLocationDto.Id);
+
+            if (leaveAllLocation is null)
+                throw new NotFoundException(nameof(leaveAllLocation), request.LeaveAllLocationDto.Id);
+
             _mapper.Map(request.LeaveAllLocationDto, leaveAllLocation);
             await _leaveAllLocationRepository.UpdateAsync(leaveAllLocation);
 
