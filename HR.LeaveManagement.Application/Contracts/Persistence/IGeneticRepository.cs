@@ -1,4 +1,4 @@
-﻿namespace HR.LeaveManagement.Application.Persistence.Contracts
+﻿namespace HR.LeaveManagement.Application.Contracts.Persistence
 {
     public interface IGeneticRepository<T> where T : class
     {
