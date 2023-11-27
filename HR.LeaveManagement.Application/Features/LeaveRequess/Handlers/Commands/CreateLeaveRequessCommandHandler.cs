@@ -57,9 +57,9 @@ namespace HR.LeaveManagement.Application.Features.LeaveRequess.Handlers.Commands
                 await _emailSender.SendEmailAsync(email);
             }
 
-            catch
+            catch (Exception exception)
             {
-                throw new BadRequestException("Internal Server Error");
+                throw new BadRequestException(exception.Message);
             }
 
             return response;
