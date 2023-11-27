@@ -1,25 +1,43 @@
-var builder = WebApplication.CreateBuilder(args);
+using HR.LeaveManagement.Application;
+using HR.LeaveManagement.Infrastructure;
+using HR.LeaveManagement.Persistence;
+
+WebApplicationBuilder applicationBuilder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+applicationBuilder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+applicationBuilder.Services.AddEndpointsApiExplorer();
+applicationBuilder.Services.AddSwaggerGen();
 
-var app = builder.Build();
+applicationBuilder.Services.ConfigureApplicationServices();
+applicationBuilder.Services.ConfigurePersistenceServices(applicationBuilder.Configuration);
+applicationBuilder.Services.ConfigureInfrastructureServices(applicationBuilder.Configuration);
+
+applicationBuilder.Services.AddCors(key =>
+{
+    key.AddPolicy("CorsPolicy",
+        applicationBuilder => applicationBuilder.AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader());
+});
+
+WebApplication webApplication = applicationBuilder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (webApplication.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    webApplication.UseSwagger();
+    webApplication.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+webApplication.UseHttpsRedirection();
 
-app.UseAuthorization();
+webApplication.UseAuthorization();
 
-app.MapControllers();
+webApplication.UseCors("CorsPolicy");
 
-app.Run();
+webApplication.MapControllers();
+
+webApplication.Run();
