@@ -54,6 +54,7 @@ namespace HR.LeaveManagement.API.Controllers
         }
 
         // PUT api/<LeaveAllLocationsController>/5
+        [HttpPut("ChangeApproval/{id}")]
         public async Task<ActionResult> ChangeApproval(int id, [FromBody] ChangeLeaveRequestApplovalDto changeLeaveRequestApplovalDto)
         {
             var command = new UpdateLeaveRequessCommand() { Id = id, ChangeLeaveRequestApploval = changeLeaveRequestApplovalDto };
