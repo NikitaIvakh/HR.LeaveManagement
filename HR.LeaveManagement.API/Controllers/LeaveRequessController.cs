@@ -53,6 +53,14 @@ namespace HR.LeaveManagement.API.Controllers
             return NoContent();
         }
 
+        // PUT api/<LeaveAllLocationsController>/5
+        public async Task<ActionResult> ChangeApproval(int id, [FromBody] ChangeLeaveRequestApplovalDto changeLeaveRequestApplovalDto)
+        {
+            var command = new UpdateLeaveRequessCommand() { Id = id, ChangeLeaveRequestApploval = changeLeaveRequestApplovalDto };
+            await _mediator.Send(command);
+            return NoContent();
+        }
+
         // DELETE api/<LeaveRequessController>/5
         [HttpDelete("DeleteLeaveRequest/{id}")]
         public async Task<ActionResult> DeleteLeaveRequest(int id)
