@@ -31,7 +31,7 @@ namespace HR.LeaveManagement.API.Controllers
         [HttpGet("GetLeaveAllLocation/{id}")]
         public async Task<ActionResult<LeaveAllLocationDto>> GetLeaveAllLocation(int id)
         {
-            var leaveAllLocation = await _mediator.Send(new GetLeaveAllLocationDetailsRequest());
+            var leaveAllLocation = await _mediator.Send(new GetLeaveAllLocationDetailsRequest() { Id = id });
             return Ok(leaveAllLocation);
         }
 
