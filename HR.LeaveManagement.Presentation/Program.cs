@@ -1,27 +1,30 @@
-var builder = WebApplication.CreateBuilder(args);
+using HR.LeaveManagement.Presentation.Services;
+
+WebApplicationBuilder applicationBuilder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+applicationBuilder.Services.AddControllersWithViews();
+applicationBuilder.Services.AddHttpClient<IClient, Client>(key => key.BaseAddress = new Uri("https://localhost:7151"));
 
-var app = builder.Build();
+WebApplication webApplication = applicationBuilder.Build();
 
 // Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+if (!webApplication.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
+    webApplication.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+    webApplication.UseHsts();
 }
 
-app.UseHttpsRedirection();
-app.UseStaticFiles();
+webApplication.UseHttpsRedirection();
+webApplication.UseStaticFiles();
 
-app.UseRouting();
+webApplication.UseRouting();
 
-app.UseAuthorization();
+webApplication.UseAuthorization();
 
-app.MapControllerRoute(
+webApplication.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-app.Run();
+webApplication.Run();
