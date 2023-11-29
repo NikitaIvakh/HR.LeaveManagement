@@ -1,10 +1,12 @@
 using HR.LeaveManagement.Presentation.Services;
+using System.Reflection;
 
 WebApplicationBuilder applicationBuilder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 applicationBuilder.Services.AddControllersWithViews();
 applicationBuilder.Services.AddHttpClient<IClient, Client>(key => key.BaseAddress = new Uri("https://localhost:7151"));
+applicationBuilder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 WebApplication webApplication = applicationBuilder.Build();
 
