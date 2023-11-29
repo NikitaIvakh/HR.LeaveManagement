@@ -1,4 +1,4 @@
-using HR.LeaveManagement.Presentation.Services;
+using HR.LeaveManagement.Presentation.Services.Base;
 using System.Reflection;
 
 WebApplicationBuilder applicationBuilder = WebApplication.CreateBuilder(args);
