@@ -1,3 +1,5 @@
+using HR.LeaveManagement.Presentation.Contracts;
+using HR.LeaveManagement.Presentation.Services;
 using HR.LeaveManagement.Presentation.Services.Base;
 using System.Reflection;
 
@@ -7,6 +9,8 @@ WebApplicationBuilder applicationBuilder = WebApplication.CreateBuilder(args);
 applicationBuilder.Services.AddControllersWithViews();
 applicationBuilder.Services.AddHttpClient<IClient, Client>(key => key.BaseAddress = new Uri("https://localhost:7151"));
 applicationBuilder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
+applicationBuilder.Services.AddSingleton<ILocalStorageService, LocalStorageService>();
 
 WebApplication webApplication = applicationBuilder.Build();
 
