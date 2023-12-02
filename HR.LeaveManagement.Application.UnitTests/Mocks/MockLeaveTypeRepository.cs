@@ -2,11 +2,11 @@
 using HR.LeaveManagement.Domain;
 using Moq;
 
-namespace HR.LeaveManagement.Application.UnitTests.Mocks
+namespace HR.LeaveManagement.Application.UnitTests.Common
 {
     public static class MockLeaveTypeRepository
     {
-        public static Mock<ILeaveTypeRepository> GetLeaveTypeRepoistory()
+        public static Mock<ILeaveTypeRepository> GetLeaveTypeRepository()
         {
             var leaveTypes = new List<LeaveType>
             {
@@ -16,12 +16,14 @@ namespace HR.LeaveManagement.Application.UnitTests.Mocks
                     DefaultDays = 10,
                     Name = "Test Vacation"
                 },
+
                 new LeaveType
                 {
                     Id = 2,
                     DefaultDays = 15,
                     Name = "Test Sick"
                 },
+
                 new LeaveType
                 {
                     Id = 3,
@@ -31,11 +33,11 @@ namespace HR.LeaveManagement.Application.UnitTests.Mocks
             };
 
             var mockRepo = new Mock<ILeaveTypeRepository>();
-            mockRepo.Setup(key => key.GetAllAsync()).ReturnsAsync(leaveTypes);
-            mockRepo.Setup(key => key.CreateAsync(It.IsAny<LeaveType>())).ReturnsAsync((LeaveType leavetype) =>
+            mockRepo.Setup(r => r.GetAllAsync()).ReturnsAsync(leaveTypes);
+            mockRepo.Setup(key => key.CreateAsync(It.IsAny<LeaveType>())).ReturnsAsync((LeaveType leaveType) =>
             {
-                leaveTypes.Add(leavetype);
-                return leavetype;
+                leaveTypes.Add(leaveType);
+                return leaveType;
             });
 
             return mockRepo;
