@@ -7,7 +7,7 @@ namespace HR.LeaveManagement.Presentation.Services
     {
         private readonly LocalStorage _localStorage;
 
-        public LocalStorageService(LocalStorage localStorage)
+        public LocalStorageService()
         {
             var config = new LocalStorageConfiguration
             {
