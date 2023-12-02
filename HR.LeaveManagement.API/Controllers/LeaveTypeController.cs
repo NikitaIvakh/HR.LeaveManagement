@@ -1,6 +1,7 @@
 ﻿using HR.LeaveManagement.Application.DTOs.LeaveType;
 using HR.LeaveManagement.Application.Features.LeaveTypes.Requests.Commands;
 using HR.LeaveManagement.Application.Features.LeaveTypes.Requests.Queries;
+using HR.LeaveManagement.Application.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -35,7 +36,9 @@ namespace HR.LeaveManagement.API.Controllers
 
         // POST api/<LeaveTypeController>
         [HttpPost("CreateLeaveType")]
-        public async Task<ActionResult> CreateLeaveType([FromBody] CreateLeaveTypeDto leaveTypeDto)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<BaseCommandResponse>> CreateLeaveType([FromBody] CreateLeaveTypeDto leaveTypeDto)
         {
             var command = new CreateLeaveTypeCommand() { LeaveTypeDto = leaveTypeDto };
             var response = await _mediator.Send(command);
@@ -44,6 +47,9 @@ namespace HR.LeaveManagement.API.Controllers
 
         // PUT api/<LeaveTypeController>
         [HttpPut("UpdateLeaveType")]
+        [ProducesDefaultResponseType]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> UpdateLeaveType([FromBody] LeaveTypeDto leaveTypeDto)
         {
             var command = new UpdateLeaveTypeCommand() { LeaveTypeDto = leaveTypeDto };
@@ -53,6 +59,9 @@ namespace HR.LeaveManagement.API.Controllers
 
         // DELETE api/<LeaveTypeController>/5
         [HttpDelete("DeleteLeaveType/{id}")]
+        [ProducesDefaultResponseType]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> DeleteLeaveType(int id)
         {
             var command = new DeleteLeaveTypeCommand() { Id = id };
