@@ -46,7 +46,7 @@ namespace HR.LeaveManagement.API.Controllers
         }
 
         // PUT api/<LeaveTypeController>
-        [HttpPut("UpdateLeaveType")]
+        [HttpPut("UpdateLeaveType/{id}")]
         [ProducesDefaultResponseType]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
