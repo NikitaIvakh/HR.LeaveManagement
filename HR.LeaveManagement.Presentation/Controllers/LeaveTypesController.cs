@@ -74,12 +74,7 @@ namespace HR.LeaveManagement.Presentation.Controllers
             try
             {
                 BaseResponse<int> response = await _leaveTypeService.UpdateLeaveTypeAsync(id, leaveTypeViewModel);
-                if (response.Status is true)
-                {
-                    return RedirectToAction(nameof(Index));
-                }
-
-                ModelState.AddModelError(string.Empty, response.ValidationErrors);
+                return RedirectToAction(nameof(Index));
             }
 
             catch (Exception exception)
