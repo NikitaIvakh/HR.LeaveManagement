@@ -5,44 +5,44 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HR.LeaveManagement.Presentation.Controllers
 {
-    public class LeaveTypeController : Controller
+    public class LeaveTypesController : Controller
     {
         private readonly ILeaveTypeService _leaveTypeService;
 
-        public LeaveTypeController(ILeaveTypeService leaveTypeService)
+        public LeaveTypesController(ILeaveTypeService leaveTypeService)
         {
             _leaveTypeService = leaveTypeService;
         }
 
-        // GET: LeaveTypeController
+        // GET: LeaveTypesController
         public async Task<ActionResult> Index()
         {
-            List<LeaveTypeViewModel> leaveTypes = await _leaveTypeService.GetLeaveTypes();
+            var leaveTypes = await _leaveTypeService.GetLeaveTypesAsync();
             return View(leaveTypes);
         }
 
-        // GET: LeaveTypeController/Details/5
+        // GET: LeaveTypesController/Details/5
         public async Task<ActionResult> Details(int id)
         {
-            LeaveTypeViewModel leaveType = await _leaveTypeService.GetLeaveType(id);
+            LeaveTypeViewModel leaveType = await _leaveTypeService.GetLeaveTypeAsync(id);
             return View(leaveType);
         }
 
-        // GET: LeaveTypeController/Create
+        // GET: LeaveTypesController/Create
         [HttpGet]
         public async Task<ActionResult> Create()
         {
             return View();
         }
 
-        // POST: LeaveTypeController/Create
+        // POST: LeaveTypesController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(CreateLeaveTypeViewModel createLeaveTypeViewModel)
         {
             try
             {
-                BaseResponse<int> response = await _leaveTypeService.CreateLeaveType(createLeaveTypeViewModel);
+                BaseResponse<int> response = await _leaveTypeService.CreateLeaveTypeAsync(createLeaveTypeViewModel);
                 if (response.Status is true)
                 {
                     return RedirectToAction(nameof(Index));
@@ -59,21 +59,21 @@ namespace HR.LeaveManagement.Presentation.Controllers
             return View(createLeaveTypeViewModel);
         }
 
-        // GET: LeaveTypeController/Edit/5
+        // GET: LeaveTypesController/Edit/5
         public async Task<ActionResult> Edit(int id)
         {
-            LeaveTypeViewModel leaveType = await _leaveTypeService.GetLeaveType(id);
+            LeaveTypeViewModel leaveType = await _leaveTypeService.GetLeaveTypeAsync(id);
             return View(leaveType);
         }
 
-        // POST: LeaveTypeController/Edit/5
+        // POST: LeaveTypesController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(int id, LeaveTypeViewModel leaveTypeViewModel)
         {
             try
             {
-                BaseResponse<int> response = await _leaveTypeService.UpdateLeaveType(id, leaveTypeViewModel);
+                BaseResponse<int> response = await _leaveTypeService.UpdateLeaveTypeAsync(id, leaveTypeViewModel);
                 if (response.Status is true)
                 {
                     return RedirectToAction(nameof(Index));
@@ -90,14 +90,14 @@ namespace HR.LeaveManagement.Presentation.Controllers
             return View(leaveTypeViewModel);
         }
 
-        // POST: LeaveTypeController/Delete/5
+        // POST: LeaveTypesController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Delete(int id)
         {
             try
             {
-                BaseResponse<int> response = await _leaveTypeService.DeleteLeaveType(id);
+                BaseResponse<int> response = await _leaveTypeService.DeleteLeaveTypeAsync(id);
                 if (response.Status is true)
                 {
                     return RedirectToAction(nameof(Index));

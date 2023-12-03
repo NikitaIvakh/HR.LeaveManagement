@@ -24,160 +24,158 @@ namespace HR.LeaveManagement.Presentation.Services.Base
     {
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<LeaveAllLocationDto>> GetLeaveAllLocationsAsync();
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<LeaveAllLocationDto>> LeaveAllLocationsAllAsync();
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<LeaveAllLocationDto>> GetLeaveAllLocationsAsync(System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<LeaveAllLocationDto>> LeaveAllLocationsAllAsync(System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<LeaveAllLocationDto> GetLeaveAllLocationAsync(int id);
+        System.Threading.Tasks.Task<BaseCommandResponse> LeaveAllLocationsPOSTAsync(CreateLeaveAllLocationDto body);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<LeaveAllLocationDto> GetLeaveAllLocationAsync(int id, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<BaseCommandResponse> LeaveAllLocationsPOSTAsync(CreateLeaveAllLocationDto body, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<LeaveAllLocationDto> CreateLeaveAllLocationAsync(CreateLeaveAllLocationDto body);
+        System.Threading.Tasks.Task LeaveAllLocationsPUTAsync(UpdateLeaveAllLocationDto body);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<LeaveAllLocationDto> CreateLeaveAllLocationAsync(CreateLeaveAllLocationDto body, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task LeaveAllLocationsPUTAsync(UpdateLeaveAllLocationDto body, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task UpdateLeaveAllLocationAsync(string id, UpdateLeaveAllLocationDto body);
+        System.Threading.Tasks.Task<LeaveAllLocationDto> LeaveAllLocationsGETAsync(int id);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task UpdateLeaveAllLocationAsync(string id, UpdateLeaveAllLocationDto body, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<LeaveAllLocationDto> LeaveAllLocationsGETAsync(int id, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task DeleteLeaveAllLocationAsync(int id);
+        System.Threading.Tasks.Task LeaveAllLocationsDELETEAsync(int id);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task DeleteLeaveAllLocationAsync(int id, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task LeaveAllLocationsDELETEAsync(int id, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<LeaveRequestDto>> GetLeaveRequestsAsync();
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<LeaveRequestListDto>> LeaveRequestsAllAsync();
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<LeaveRequestDto>> GetLeaveRequestsAsync(System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<LeaveRequestListDto>> LeaveRequestsAllAsync(System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<LeaveRequestDto> GetLeaveRequestAsync(int id);
+        System.Threading.Tasks.Task LeaveRequestsPOSTAsync(CreateLeaveRequestDto body);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<LeaveRequestDto> GetLeaveRequestAsync(int id, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task LeaveRequestsPOSTAsync(CreateLeaveRequestDto body, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<LeaveRequestDto> CreateLeaveRequestAsync(CreateLeaveRequestDto body);
+        System.Threading.Tasks.Task<LeaveRequestDto> LeaveRequestsGETAsync(int id);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<LeaveRequestDto> CreateLeaveRequestAsync(CreateLeaveRequestDto body, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<LeaveRequestDto> LeaveRequestsGETAsync(int id, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task UpdateLeaveRequestAsync(int id, UpdateLeaveRequestDto body);
+        System.Threading.Tasks.Task LeaveRequestsPUTAsync(int id, UpdateLeaveRequestDto body);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task UpdateLeaveRequestAsync(int id, UpdateLeaveRequestDto body, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task LeaveRequestsPUTAsync(int id, UpdateLeaveRequestDto body, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task ChangeApprovalAsync(int id, ChangeLeaveRequestApplovalDto body);
+        System.Threading.Tasks.Task LeaveRequestsDELETEAsync(int id);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task ChangeApprovalAsync(int id, ChangeLeaveRequestApplovalDto body, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task LeaveRequestsDELETEAsync(int id, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task DeleteLeaveRequestAsync(int id);
+        System.Threading.Tasks.Task ChangeapprovalAsync(int id, ChangeLeaveRequestApplovalDto body);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task DeleteLeaveRequestAsync(int id, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task ChangeapprovalAsync(int id, ChangeLeaveRequestApplovalDto body, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<LeaveTypeDto>> GetAllLeaveTypesAsync();
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<LeaveTypeDto>> LeaveTypesAllAsync();
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<LeaveTypeDto>> GetAllLeaveTypesAsync(System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<LeaveTypeDto>> LeaveTypesAllAsync(System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<LeaveTypeDto> GetLeaveTypeAsync(int id);
+        System.Threading.Tasks.Task<BaseCommandResponse> LeaveTypesPOSTAsync(CreateLeaveTypeDto body);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<LeaveTypeDto> GetLeaveTypeAsync(int id, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<BaseCommandResponse> LeaveTypesPOSTAsync(CreateLeaveTypeDto body, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<BaseCommandResponse> CreateLeaveTypeAsync(CreateLeaveTypeDto body);
+        System.Threading.Tasks.Task<LeaveTypeDto> LeaveTypesGETAsync(int id);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<BaseCommandResponse> CreateLeaveTypeAsync(CreateLeaveTypeDto body, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<LeaveTypeDto> LeaveTypesGETAsync(int id, System.Threading.CancellationToken cancellationToken);
 
-        /// <returns>No Content</returns>
+        /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task UpdateLeaveTypeAsync(string id, LeaveTypeDto body);
-
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>No Content</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task UpdateLeaveTypeAsync(string id, LeaveTypeDto body, System.Threading.CancellationToken cancellationToken);
-
-        /// <returns>No Content</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task DeleteLeaveTypeAsync(int id);
+        System.Threading.Tasks.Task LeaveTypesPUTAsync(string id, LeaveTypeDto body);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>No Content</returns>
+        /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task DeleteLeaveTypeAsync(int id, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task LeaveTypesPUTAsync(string id, LeaveTypeDto body, System.Threading.CancellationToken cancellationToken);
+
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task LeaveTypesDELETEAsync(int id);
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task LeaveTypesDELETEAsync(int id, System.Threading.CancellationToken cancellationToken);
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "14.0.0.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class Client : IClient
     {
-        private string _baseUrl;
         private System.Net.Http.HttpClient _httpClient;
         private static System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(CreateSerializerSettings, true);
 
-        public Client(string baseUrl, System.Net.Http.HttpClient httpClient)
+        public Client(System.Net.Http.HttpClient httpClient)
         {
-            BaseUrl = baseUrl;
             _httpClient = httpClient;
         }
 
@@ -186,17 +184,6 @@ namespace HR.LeaveManagement.Presentation.Services.Base
             var settings = new Newtonsoft.Json.JsonSerializerSettings();
             UpdateJsonSerializerSettings(settings);
             return settings;
-        }
-
-        public string BaseUrl
-        {
-            get { return _baseUrl; }
-            set
-            {
-                _baseUrl = value;
-                if (!string.IsNullOrEmpty(_baseUrl) && !_baseUrl.EndsWith("/"))
-                    _baseUrl += '/';
-            }
         }
 
         protected Newtonsoft.Json.JsonSerializerSettings JsonSerializerSettings { get { return _settings.Value; } }
@@ -209,15 +196,15 @@ namespace HR.LeaveManagement.Presentation.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<LeaveAllLocationDto>> GetLeaveAllLocationsAsync()
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<LeaveAllLocationDto>> LeaveAllLocationsAllAsync()
         {
-            return GetLeaveAllLocationsAsync(System.Threading.CancellationToken.None);
+            return LeaveAllLocationsAllAsync(System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<LeaveAllLocationDto>> GetLeaveAllLocationsAsync(System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<LeaveAllLocationDto>> LeaveAllLocationsAllAsync(System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -229,12 +216,10 @@ namespace HR.LeaveManagement.Presentation.Services.Base
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     var urlBuilder_ = new System.Text.StringBuilder();
-                    if (!string.IsNullOrEmpty(BaseUrl)) urlBuilder_.Append(BaseUrl);
+                
                     urlBuilder_.Append("api");
                     urlBuilder_.Append('/');
                     urlBuilder_.Append("LeaveAllLocations");
-                    urlBuilder_.Append('/');
-                    urlBuilder_.Append("GetLeaveAllLocations");
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -288,15 +273,171 @@ namespace HR.LeaveManagement.Presentation.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<LeaveAllLocationDto> GetLeaveAllLocationAsync(int id)
+        public virtual System.Threading.Tasks.Task<BaseCommandResponse> LeaveAllLocationsPOSTAsync(CreateLeaveAllLocationDto body)
         {
-            return GetLeaveAllLocationAsync(id, System.Threading.CancellationToken.None);
+            return LeaveAllLocationsPOSTAsync(body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<LeaveAllLocationDto> GetLeaveAllLocationAsync(int id, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<BaseCommandResponse> LeaveAllLocationsPOSTAsync(CreateLeaveAllLocationDto body, System.Threading.CancellationToken cancellationToken)
+        {
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                
+                    urlBuilder_.Append("api");
+                    urlBuilder_.Append('/');
+                    urlBuilder_.Append("LeaveAllLocations");
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<BaseCommandResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task LeaveAllLocationsPUTAsync(UpdateLeaveAllLocationDto body)
+        {
+            return LeaveAllLocationsPUTAsync(body, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task LeaveAllLocationsPUTAsync(UpdateLeaveAllLocationDto body, System.Threading.CancellationToken cancellationToken)
+        {
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("PUT");
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                
+                    urlBuilder_.Append("api");
+                    urlBuilder_.Append('/');
+                    urlBuilder_.Append("LeaveAllLocations");
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<LeaveAllLocationDto> LeaveAllLocationsGETAsync(int id)
+        {
+            return LeaveAllLocationsGETAsync(id, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<LeaveAllLocationDto> LeaveAllLocationsGETAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -311,12 +452,10 @@ namespace HR.LeaveManagement.Presentation.Services.Base
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     var urlBuilder_ = new System.Text.StringBuilder();
-                    if (!string.IsNullOrEmpty(BaseUrl)) urlBuilder_.Append(BaseUrl);
+                
                     urlBuilder_.Append("api");
                     urlBuilder_.Append('/');
                     urlBuilder_.Append("LeaveAllLocations");
-                    urlBuilder_.Append('/');
-                    urlBuilder_.Append("GetLeaveAllLocation");
                     urlBuilder_.Append('/');
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
@@ -372,180 +511,15 @@ namespace HR.LeaveManagement.Presentation.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<LeaveAllLocationDto> CreateLeaveAllLocationAsync(CreateLeaveAllLocationDto body)
+        public virtual System.Threading.Tasks.Task LeaveAllLocationsDELETEAsync(int id)
         {
-            return CreateLeaveAllLocationAsync(body, System.Threading.CancellationToken.None);
+            return LeaveAllLocationsDELETEAsync(id, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<LeaveAllLocationDto> CreateLeaveAllLocationAsync(CreateLeaveAllLocationDto body, System.Threading.CancellationToken cancellationToken)
-        {
-            var client_ = _httpClient;
-            var disposeClient_ = false;
-            try
-            {
-                using (var request_ = new System.Net.Http.HttpRequestMessage())
-                {
-                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
-                    var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                    request_.Content = content_;
-                    request_.Method = new System.Net.Http.HttpMethod("POST");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
-
-                    var urlBuilder_ = new System.Text.StringBuilder();
-                    if (!string.IsNullOrEmpty(BaseUrl)) urlBuilder_.Append(BaseUrl);
-                    urlBuilder_.Append("api");
-                    urlBuilder_.Append('/');
-                    urlBuilder_.Append("LeaveAllLocations");
-                    urlBuilder_.Append('/');
-                    urlBuilder_.Append("CreateLeaveAllLocation");
-
-                    PrepareRequest(client_, request_, urlBuilder_);
-
-                    var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-
-                    PrepareRequest(client_, request_, url_);
-
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    var disposeResponse_ = true;
-                    try
-                    {
-                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
-                        if (response_.Content != null && response_.Content.Headers != null)
-                        {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-
-                        ProcessResponse(client_, response_);
-
-                        var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
-                        {
-                            var objectResponse_ = await ReadObjectResponseAsync<LeaveAllLocationDto>(response_, headers_, cancellationToken).ConfigureAwait(false);
-                            if (objectResponse_.Object == null)
-                            {
-                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
-                            return objectResponse_.Object;
-                        }
-                        else
-                        {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
-                        }
-                    }
-                    finally
-                    {
-                        if (disposeResponse_)
-                            response_.Dispose();
-                    }
-                }
-            }
-            finally
-            {
-                if (disposeClient_)
-                    client_.Dispose();
-            }
-        }
-
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task UpdateLeaveAllLocationAsync(string id, UpdateLeaveAllLocationDto body)
-        {
-            return UpdateLeaveAllLocationAsync(id, body, System.Threading.CancellationToken.None);
-        }
-
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task UpdateLeaveAllLocationAsync(string id, UpdateLeaveAllLocationDto body, System.Threading.CancellationToken cancellationToken)
-        {
-            if (id == null)
-                throw new System.ArgumentNullException("id");
-
-            var client_ = _httpClient;
-            var disposeClient_ = false;
-            try
-            {
-                using (var request_ = new System.Net.Http.HttpRequestMessage())
-                {
-                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
-                    var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                    request_.Content = content_;
-                    request_.Method = new System.Net.Http.HttpMethod("PUT");
-
-                    var urlBuilder_ = new System.Text.StringBuilder();
-                    if (!string.IsNullOrEmpty(BaseUrl)) urlBuilder_.Append(BaseUrl);
-                    urlBuilder_.Append("api");
-                    urlBuilder_.Append('/');
-                    urlBuilder_.Append("LeaveAllLocations");
-                    urlBuilder_.Append('/');
-                    urlBuilder_.Append("UpdateLeaveAllLocation");
-                    urlBuilder_.Append('/');
-                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
-
-                    PrepareRequest(client_, request_, urlBuilder_);
-
-                    var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-
-                    PrepareRequest(client_, request_, url_);
-
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    var disposeResponse_ = true;
-                    try
-                    {
-                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
-                        if (response_.Content != null && response_.Content.Headers != null)
-                        {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-
-                        ProcessResponse(client_, response_);
-
-                        var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
-                        {
-                            return;
-                        }
-                        else
-                        {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
-                        }
-                    }
-                    finally
-                    {
-                        if (disposeResponse_)
-                            response_.Dispose();
-                    }
-                }
-            }
-            finally
-            {
-                if (disposeClient_)
-                    client_.Dispose();
-            }
-        }
-
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task DeleteLeaveAllLocationAsync(int id)
-        {
-            return DeleteLeaveAllLocationAsync(id, System.Threading.CancellationToken.None);
-        }
-
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task DeleteLeaveAllLocationAsync(int id, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task LeaveAllLocationsDELETEAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -559,12 +533,10 @@ namespace HR.LeaveManagement.Presentation.Services.Base
                     request_.Method = new System.Net.Http.HttpMethod("DELETE");
 
                     var urlBuilder_ = new System.Text.StringBuilder();
-                    if (!string.IsNullOrEmpty(BaseUrl)) urlBuilder_.Append(BaseUrl);
+                
                     urlBuilder_.Append("api");
                     urlBuilder_.Append('/');
                     urlBuilder_.Append("LeaveAllLocations");
-                    urlBuilder_.Append('/');
-                    urlBuilder_.Append("DeleteLeaveAllLocation");
                     urlBuilder_.Append('/');
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
@@ -615,15 +587,15 @@ namespace HR.LeaveManagement.Presentation.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<LeaveRequestDto>> GetLeaveRequestsAsync()
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<LeaveRequestListDto>> LeaveRequestsAllAsync()
         {
-            return GetLeaveRequestsAsync(System.Threading.CancellationToken.None);
+            return LeaveRequestsAllAsync(System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<LeaveRequestDto>> GetLeaveRequestsAsync(System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<LeaveRequestListDto>> LeaveRequestsAllAsync(System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -635,12 +607,10 @@ namespace HR.LeaveManagement.Presentation.Services.Base
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     var urlBuilder_ = new System.Text.StringBuilder();
-                    if (!string.IsNullOrEmpty(BaseUrl)) urlBuilder_.Append(BaseUrl);
+                
                     urlBuilder_.Append("api");
                     urlBuilder_.Append('/');
-                    urlBuilder_.Append("LeaveRequess");
-                    urlBuilder_.Append('/');
-                    urlBuilder_.Append("GetLeaveRequests");
+                    urlBuilder_.Append("LeaveRequests");
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -665,7 +635,7 @@ namespace HR.LeaveManagement.Presentation.Services.Base
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<LeaveRequestDto>>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<LeaveRequestListDto>>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -694,15 +664,90 @@ namespace HR.LeaveManagement.Presentation.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<LeaveRequestDto> GetLeaveRequestAsync(int id)
+        public virtual System.Threading.Tasks.Task LeaveRequestsPOSTAsync(CreateLeaveRequestDto body)
         {
-            return GetLeaveRequestAsync(id, System.Threading.CancellationToken.None);
+            return LeaveRequestsPOSTAsync(body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<LeaveRequestDto> GetLeaveRequestAsync(int id, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task LeaveRequestsPOSTAsync(CreateLeaveRequestDto body, System.Threading.CancellationToken cancellationToken)
+        {
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                
+                    urlBuilder_.Append("api");
+                    urlBuilder_.Append('/');
+                    urlBuilder_.Append("LeaveRequests");
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<LeaveRequestDto> LeaveRequestsGETAsync(int id)
+        {
+            return LeaveRequestsGETAsync(id, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<LeaveRequestDto> LeaveRequestsGETAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -717,12 +762,10 @@ namespace HR.LeaveManagement.Presentation.Services.Base
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     var urlBuilder_ = new System.Text.StringBuilder();
-                    if (!string.IsNullOrEmpty(BaseUrl)) urlBuilder_.Append(BaseUrl);
+                
                     urlBuilder_.Append("api");
                     urlBuilder_.Append('/');
-                    urlBuilder_.Append("LeaveRequess");
-                    urlBuilder_.Append('/');
-                    urlBuilder_.Append("GetLeaveRequest");
+                    urlBuilder_.Append("LeaveRequests");
                     urlBuilder_.Append('/');
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
@@ -778,98 +821,15 @@ namespace HR.LeaveManagement.Presentation.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<LeaveRequestDto> CreateLeaveRequestAsync(CreateLeaveRequestDto body)
+        public virtual System.Threading.Tasks.Task LeaveRequestsPUTAsync(int id, UpdateLeaveRequestDto body)
         {
-            return CreateLeaveRequestAsync(body, System.Threading.CancellationToken.None);
+            return LeaveRequestsPUTAsync(id, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<LeaveRequestDto> CreateLeaveRequestAsync(CreateLeaveRequestDto body, System.Threading.CancellationToken cancellationToken)
-        {
-            var client_ = _httpClient;
-            var disposeClient_ = false;
-            try
-            {
-                using (var request_ = new System.Net.Http.HttpRequestMessage())
-                {
-                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
-                    var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                    request_.Content = content_;
-                    request_.Method = new System.Net.Http.HttpMethod("POST");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
-
-                    var urlBuilder_ = new System.Text.StringBuilder();
-                    if (!string.IsNullOrEmpty(BaseUrl)) urlBuilder_.Append(BaseUrl);
-                    urlBuilder_.Append("api");
-                    urlBuilder_.Append('/');
-                    urlBuilder_.Append("LeaveRequess");
-                    urlBuilder_.Append('/');
-                    urlBuilder_.Append("CreateLeaveRequest");
-
-                    PrepareRequest(client_, request_, urlBuilder_);
-
-                    var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-
-                    PrepareRequest(client_, request_, url_);
-
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    var disposeResponse_ = true;
-                    try
-                    {
-                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
-                        if (response_.Content != null && response_.Content.Headers != null)
-                        {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-
-                        ProcessResponse(client_, response_);
-
-                        var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
-                        {
-                            var objectResponse_ = await ReadObjectResponseAsync<LeaveRequestDto>(response_, headers_, cancellationToken).ConfigureAwait(false);
-                            if (objectResponse_.Object == null)
-                            {
-                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
-                            return objectResponse_.Object;
-                        }
-                        else
-                        {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
-                        }
-                    }
-                    finally
-                    {
-                        if (disposeResponse_)
-                            response_.Dispose();
-                    }
-                }
-            }
-            finally
-            {
-                if (disposeClient_)
-                    client_.Dispose();
-            }
-        }
-
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task UpdateLeaveRequestAsync(int id, UpdateLeaveRequestDto body)
-        {
-            return UpdateLeaveRequestAsync(id, body, System.Threading.CancellationToken.None);
-        }
-
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task UpdateLeaveRequestAsync(int id, UpdateLeaveRequestDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task LeaveRequestsPUTAsync(int id, UpdateLeaveRequestDto body, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -887,12 +847,10 @@ namespace HR.LeaveManagement.Presentation.Services.Base
                     request_.Method = new System.Net.Http.HttpMethod("PUT");
 
                     var urlBuilder_ = new System.Text.StringBuilder();
-                    if (!string.IsNullOrEmpty(BaseUrl)) urlBuilder_.Append(BaseUrl);
+                
                     urlBuilder_.Append("api");
                     urlBuilder_.Append('/');
-                    urlBuilder_.Append("LeaveRequess");
-                    urlBuilder_.Append('/');
-                    urlBuilder_.Append("UpdateLeaveRequest");
+                    urlBuilder_.Append("LeaveRequests");
                     urlBuilder_.Append('/');
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
@@ -943,97 +901,15 @@ namespace HR.LeaveManagement.Presentation.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task ChangeApprovalAsync(int id, ChangeLeaveRequestApplovalDto body)
+        public virtual System.Threading.Tasks.Task LeaveRequestsDELETEAsync(int id)
         {
-            return ChangeApprovalAsync(id, body, System.Threading.CancellationToken.None);
+            return LeaveRequestsDELETEAsync(id, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task ChangeApprovalAsync(int id, ChangeLeaveRequestApplovalDto body, System.Threading.CancellationToken cancellationToken)
-        {
-            if (id == null)
-                throw new System.ArgumentNullException("id");
-
-            var client_ = _httpClient;
-            var disposeClient_ = false;
-            try
-            {
-                using (var request_ = new System.Net.Http.HttpRequestMessage())
-                {
-                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
-                    var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                    request_.Content = content_;
-                    request_.Method = new System.Net.Http.HttpMethod("PUT");
-
-                    var urlBuilder_ = new System.Text.StringBuilder();
-                    if (!string.IsNullOrEmpty(BaseUrl)) urlBuilder_.Append(BaseUrl);
-                    urlBuilder_.Append("api");
-                    urlBuilder_.Append('/');
-                    urlBuilder_.Append("LeaveRequess");
-                    urlBuilder_.Append('/');
-                    urlBuilder_.Append("ChangeApproval");
-                    urlBuilder_.Append('/');
-                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
-
-                    PrepareRequest(client_, request_, urlBuilder_);
-
-                    var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-
-                    PrepareRequest(client_, request_, url_);
-
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    var disposeResponse_ = true;
-                    try
-                    {
-                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
-                        if (response_.Content != null && response_.Content.Headers != null)
-                        {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-
-                        ProcessResponse(client_, response_);
-
-                        var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
-                        {
-                            return;
-                        }
-                        else
-                        {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
-                        }
-                    }
-                    finally
-                    {
-                        if (disposeResponse_)
-                            response_.Dispose();
-                    }
-                }
-            }
-            finally
-            {
-                if (disposeClient_)
-                    client_.Dispose();
-            }
-        }
-
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task DeleteLeaveRequestAsync(int id)
-        {
-            return DeleteLeaveRequestAsync(id, System.Threading.CancellationToken.None);
-        }
-
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task DeleteLeaveRequestAsync(int id, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task LeaveRequestsDELETEAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -1047,12 +923,10 @@ namespace HR.LeaveManagement.Presentation.Services.Base
                     request_.Method = new System.Net.Http.HttpMethod("DELETE");
 
                     var urlBuilder_ = new System.Text.StringBuilder();
-                    if (!string.IsNullOrEmpty(BaseUrl)) urlBuilder_.Append(BaseUrl);
+                
                     urlBuilder_.Append("api");
                     urlBuilder_.Append('/');
-                    urlBuilder_.Append("LeaveRequess");
-                    urlBuilder_.Append('/');
-                    urlBuilder_.Append("DeleteLeaveRequest");
+                    urlBuilder_.Append("LeaveRequests");
                     urlBuilder_.Append('/');
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
@@ -1103,15 +977,97 @@ namespace HR.LeaveManagement.Presentation.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<LeaveTypeDto>> GetAllLeaveTypesAsync()
+        public virtual System.Threading.Tasks.Task ChangeapprovalAsync(int id, ChangeLeaveRequestApplovalDto body)
         {
-            return GetAllLeaveTypesAsync(System.Threading.CancellationToken.None);
+            return ChangeapprovalAsync(id, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<LeaveTypeDto>> GetAllLeaveTypesAsync(System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task ChangeapprovalAsync(int id, ChangeLeaveRequestApplovalDto body, System.Threading.CancellationToken cancellationToken)
+        {
+            if (id == null)
+                throw new System.ArgumentNullException("id");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("PUT");
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                
+                    urlBuilder_.Append("api");
+                    urlBuilder_.Append('/');
+                    urlBuilder_.Append("LeaveRequests");
+                    urlBuilder_.Append('/');
+                    urlBuilder_.Append("changeapproval");
+                    urlBuilder_.Append('/');
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<LeaveTypeDto>> LeaveTypesAllAsync()
+        {
+            return LeaveTypesAllAsync(System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<LeaveTypeDto>> LeaveTypesAllAsync(System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -1123,12 +1079,10 @@ namespace HR.LeaveManagement.Presentation.Services.Base
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     var urlBuilder_ = new System.Text.StringBuilder();
-                    if (!string.IsNullOrEmpty(BaseUrl)) urlBuilder_.Append(BaseUrl);
+                
                     urlBuilder_.Append("api");
                     urlBuilder_.Append('/');
-                    urlBuilder_.Append("LeaveType");
-                    urlBuilder_.Append('/');
-                    urlBuilder_.Append("GetAllLeaveTypes");
+                    urlBuilder_.Append("LeaveTypes");
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -1182,15 +1136,96 @@ namespace HR.LeaveManagement.Presentation.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<LeaveTypeDto> GetLeaveTypeAsync(int id)
+        public virtual System.Threading.Tasks.Task<BaseCommandResponse> LeaveTypesPOSTAsync(CreateLeaveTypeDto body)
         {
-            return GetLeaveTypeAsync(id, System.Threading.CancellationToken.None);
+            return LeaveTypesPOSTAsync(body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<LeaveTypeDto> GetLeaveTypeAsync(int id, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<BaseCommandResponse> LeaveTypesPOSTAsync(CreateLeaveTypeDto body, System.Threading.CancellationToken cancellationToken)
+        {
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
+
+                    var urlBuilder_ = new System.Text.StringBuilder();
+                
+                    urlBuilder_.Append("api");
+                    urlBuilder_.Append('/');
+                    urlBuilder_.Append("LeaveTypes");
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<BaseCommandResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual System.Threading.Tasks.Task<LeaveTypeDto> LeaveTypesGETAsync(int id)
+        {
+            return LeaveTypesGETAsync(id, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<LeaveTypeDto> LeaveTypesGETAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -1205,12 +1240,10 @@ namespace HR.LeaveManagement.Presentation.Services.Base
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     var urlBuilder_ = new System.Text.StringBuilder();
-                    if (!string.IsNullOrEmpty(BaseUrl)) urlBuilder_.Append(BaseUrl);
+                
                     urlBuilder_.Append("api");
                     urlBuilder_.Append('/');
-                    urlBuilder_.Append("LeaveType");
-                    urlBuilder_.Append('/');
-                    urlBuilder_.Append("GetLeaveType");
+                    urlBuilder_.Append("LeaveTypes");
                     urlBuilder_.Append('/');
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
@@ -1266,16 +1299,19 @@ namespace HR.LeaveManagement.Presentation.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<BaseCommandResponse> CreateLeaveTypeAsync(CreateLeaveTypeDto body)
+        public virtual System.Threading.Tasks.Task LeaveTypesPUTAsync(string id, LeaveTypeDto body)
         {
-            return CreateLeaveTypeAsync(body, System.Threading.CancellationToken.None);
+            return LeaveTypesPUTAsync(id, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<BaseCommandResponse> CreateLeaveTypeAsync(CreateLeaveTypeDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task LeaveTypesPUTAsync(string id, LeaveTypeDto body, System.Threading.CancellationToken cancellationToken)
         {
+            if (id == null)
+                throw new System.ArgumentNullException("id");
+
             var client_ = _httpClient;
             var disposeClient_ = false;
             try
@@ -1286,16 +1322,15 @@ namespace HR.LeaveManagement.Presentation.Services.Base
                     var content_ = new System.Net.Http.StringContent(json_);
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
-                    request_.Method = new System.Net.Http.HttpMethod("POST");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
+                    request_.Method = new System.Net.Http.HttpMethod("PUT");
 
                     var urlBuilder_ = new System.Text.StringBuilder();
-                    if (!string.IsNullOrEmpty(BaseUrl)) urlBuilder_.Append(BaseUrl);
+                
                     urlBuilder_.Append("api");
                     urlBuilder_.Append('/');
-                    urlBuilder_.Append("LeaveType");
+                    urlBuilder_.Append("LeaveTypes");
                     urlBuilder_.Append('/');
-                    urlBuilder_.Append("CreateLeaveType");
+                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -1320,22 +1355,7 @@ namespace HR.LeaveManagement.Presentation.Services.Base
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<BaseCommandResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
-                            if (objectResponse_.Object == null)
-                            {
-                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
-                            return objectResponse_.Object;
-                        }
-                        else
-                        if (status_ == 400)
-                        {
-                            var objectResponse_ = await ReadObjectResponseAsync<ProblemDetails>(response_, headers_, cancellationToken).ConfigureAwait(false);
-                            if (objectResponse_.Object == null)
-                            {
-                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
-                            throw new ApiException<ProblemDetails>("Bad Request", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            return;
                         }
                         else
                         {
@@ -1357,113 +1377,17 @@ namespace HR.LeaveManagement.Presentation.Services.Base
             }
         }
 
-        /// <returns>No Content</returns>
+        /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task UpdateLeaveTypeAsync(string id, LeaveTypeDto body)
+        public virtual System.Threading.Tasks.Task LeaveTypesDELETEAsync(int id)
         {
-            return UpdateLeaveTypeAsync(id, body, System.Threading.CancellationToken.None);
+            return LeaveTypesDELETEAsync(id, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>No Content</returns>
+        /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task UpdateLeaveTypeAsync(string id, LeaveTypeDto body, System.Threading.CancellationToken cancellationToken)
-        {
-            if (id == null)
-                throw new System.ArgumentNullException("id");
-
-            var client_ = _httpClient;
-            var disposeClient_ = false;
-            try
-            {
-                using (var request_ = new System.Net.Http.HttpRequestMessage())
-                {
-                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
-                    var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                    request_.Content = content_;
-                    request_.Method = new System.Net.Http.HttpMethod("PUT");
-
-                    var urlBuilder_ = new System.Text.StringBuilder();
-                    if (!string.IsNullOrEmpty(BaseUrl)) urlBuilder_.Append(BaseUrl);
-                    urlBuilder_.Append("api");
-                    urlBuilder_.Append('/');
-                    urlBuilder_.Append("LeaveType");
-                    urlBuilder_.Append('/');
-                    urlBuilder_.Append("UpdateLeaveType");
-                    urlBuilder_.Append('/');
-                    urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
-
-                    PrepareRequest(client_, request_, urlBuilder_);
-
-                    var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-
-                    PrepareRequest(client_, request_, url_);
-
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    var disposeResponse_ = true;
-                    try
-                    {
-                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
-                        if (response_.Content != null && response_.Content.Headers != null)
-                        {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-
-                        ProcessResponse(client_, response_);
-
-                        var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
-                        {
-                            return;
-                        }
-                        else
-                        if (status_ == 404)
-                        {
-                            var objectResponse_ = await ReadObjectResponseAsync<ProblemDetails>(response_, headers_, cancellationToken).ConfigureAwait(false);
-                            if (objectResponse_.Object == null)
-                            {
-                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
-                            throw new ApiException<ProblemDetails>("Not Found", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
-                        }
-                        else
-                        {
-                            var objectResponse_ = await ReadObjectResponseAsync<ProblemDetails>(response_, headers_, cancellationToken).ConfigureAwait(false);
-                            if (objectResponse_.Object == null)
-                            {
-                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
-                            throw new ApiException<ProblemDetails>("Error", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
-                        }
-                    }
-                    finally
-                    {
-                        if (disposeResponse_)
-                            response_.Dispose();
-                    }
-                }
-            }
-            finally
-            {
-                if (disposeClient_)
-                    client_.Dispose();
-            }
-        }
-
-        /// <returns>No Content</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task DeleteLeaveTypeAsync(int id)
-        {
-            return DeleteLeaveTypeAsync(id, System.Threading.CancellationToken.None);
-        }
-
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>No Content</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task DeleteLeaveTypeAsync(int id, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task LeaveTypesDELETEAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -1477,12 +1401,10 @@ namespace HR.LeaveManagement.Presentation.Services.Base
                     request_.Method = new System.Net.Http.HttpMethod("DELETE");
 
                     var urlBuilder_ = new System.Text.StringBuilder();
-                    if (!string.IsNullOrEmpty(BaseUrl)) urlBuilder_.Append(BaseUrl);
+                
                     urlBuilder_.Append("api");
                     urlBuilder_.Append('/');
-                    urlBuilder_.Append("LeaveType");
-                    urlBuilder_.Append('/');
-                    urlBuilder_.Append("DeleteLeaveType");
+                    urlBuilder_.Append("LeaveTypes");
                     urlBuilder_.Append('/');
                     urlBuilder_.Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
@@ -1507,28 +1429,14 @@ namespace HR.LeaveManagement.Presentation.Services.Base
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 204)
+                        if (status_ == 200)
                         {
                             return;
                         }
                         else
-                        if (status_ == 404)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ProblemDetails>(response_, headers_, cancellationToken).ConfigureAwait(false);
-                            if (objectResponse_.Object == null)
-                            {
-                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
-                            throw new ApiException<ProblemDetails>("Not Found", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
-                        }
-                        else
-                        {
-                            var objectResponse_ = await ReadObjectResponseAsync<ProblemDetails>(response_, headers_, cancellationToken).ConfigureAwait(false);
-                            if (objectResponse_.Object == null)
-                            {
-                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
-                            throw new ApiException<ProblemDetails>("Error", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
                         }
                     }
                     finally
@@ -1774,6 +1682,23 @@ namespace HR.LeaveManagement.Presentation.Services.Base
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.0.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class LeaveRequestListDto
+    {
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Id { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("leaveType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public LeaveTypeDto LeaveType { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("dateRequest", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset DateRequest { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("approved", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? Approved { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.0.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class LeaveTypeDto
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -1784,35 +1709,6 @@ namespace HR.LeaveManagement.Presentation.Services.Base
 
         [Newtonsoft.Json.JsonProperty("defaultDays", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int DefaultDays { get; set; }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.0.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class ProblemDetails
-    {
-        [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Type { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("title", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Title { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Status { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("detail", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Detail { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("instance", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Instance { get; set; }
-
-        private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
-
-        [Newtonsoft.Json.JsonExtensionData]
-        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
-        {
-            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
-            set { _additionalProperties = value; }
-        }
 
     }
 

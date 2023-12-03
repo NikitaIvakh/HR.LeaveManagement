@@ -33,19 +33,22 @@ WebApplication webApplication = applicationBuilder.Build();
 if (webApplication.Environment.IsDevelopment())
 {
     webApplication.UseDeveloperExceptionPage();
-    webApplication.UseSwagger();
-    webApplication.UseSwaggerUI(key =>
-    {
-        key.SwaggerEndpoint("/swagger/v1/swagger.json", "HR LeaveManagement API");
-    });
 }
 
+webApplication.UseSwagger();
+webApplication.UseSwaggerUI(key => key.SwaggerEndpoint("/swagger/v1/swagger.json", "HR LeaveManagement API"));
+
 webApplication.UseHttpsRedirection();
+
+webApplication.UseRouting();
 
 webApplication.UseAuthorization();
 
 webApplication.UseCors("CorsPolicy");
 
-webApplication.MapControllers();
+webApplication.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
 
 webApplication.Run();

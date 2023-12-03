@@ -14,6 +14,6 @@ namespace HR.LeaveManagement.Presentation.Models
 
         [Required]
         [Display(Name = "Default number of days")]
-        public int DefaulyDays { get; set; }
+        public int DefaultDays { get; set; }
     }
 }

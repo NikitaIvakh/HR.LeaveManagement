@@ -18,25 +18,25 @@ namespace HR.LeaveManagement.Presentation.Services
             _httpClient = httpClient;
         }
 
-        public async Task<List<LeaveTypeViewModel>> GetLeaveTypes()
+        public async Task<List<LeaveTypeViewModel>> GetLeaveTypesAsync()
         {
-            ICollection<LeaveTypeDto> leaveTypes = await _client.GetAllLeaveTypesAsync();
+            var leaveTypes = await _client.LeaveTypesAllAsync();
             return _mapper.Map<List<LeaveTypeViewModel>>(leaveTypes);
         }
 
-        public async Task<LeaveTypeViewModel> GetLeaveType(int id)
+        public async Task<LeaveTypeViewModel> GetLeaveTypeAsync(int id)
         {
-            LeaveTypeDto leaveType = await _client.GetLeaveTypeAsync(id);
+            LeaveTypeDto leaveType = await _client.LeaveTypesGETAsync(id);
             return _mapper.Map<LeaveTypeViewModel>(leaveType);
         }
 
-        public async Task<BaseResponse<int>> CreateLeaveType(CreateLeaveTypeViewModel leaveType)
+        public async Task<BaseResponse<int>> CreateLeaveTypeAsync(CreateLeaveTypeViewModel leaveType)
         {
             try
             {
                 BaseResponse<int> response = new();
                 CreateLeaveTypeDto createLeaveTypeDto = _mapper.Map<CreateLeaveTypeDto>(leaveType);
-                BaseCommandResponse apiResponse = await _client.CreateLeaveTypeAsync(createLeaveTypeDto);
+                BaseCommandResponse apiResponse = await _client.LeaveTypesPOSTAsync(createLeaveTypeDto);
 
                 if (apiResponse.Success)
                 {
@@ -61,12 +61,12 @@ namespace HR.LeaveManagement.Presentation.Services
             }
         }
 
-        public async Task<BaseResponse<int>> UpdateLeaveType(int id, LeaveTypeViewModel leaveType)
+        public async Task<BaseResponse<int>> UpdateLeaveTypeAsync(int id, LeaveTypeViewModel leaveType)
         {
             try
             {
                 LeaveTypeDto leaveTypeDto = _mapper.Map<LeaveTypeDto>(leaveType);
-                await _client.UpdateLeaveTypeAsync(id.ToString(), leaveTypeDto);
+                await _client.LeaveTypesPUTAsync(id.ToString(), leaveTypeDto);
                 return new BaseResponse<int> { Status = true };
             }
 
@@ -76,11 +76,11 @@ namespace HR.LeaveManagement.Presentation.Services
             }
         }
 
-        public async Task<BaseResponse<int>> DeleteLeaveType(int id)
+        public async Task<BaseResponse<int>> DeleteLeaveTypeAsync(int id)
         {
             try
             {
-                await _client.DeleteLeaveTypeAsync(id);
+                await _client.LeaveTypesDELETEAsync(id);
                 return new BaseResponse<int> { Status = true };
             }
 

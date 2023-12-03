@@ -1,17 +1,19 @@
 using HR.LeaveManagement.Presentation.Contracts;
 using HR.LeaveManagement.Presentation.Services;
 using HR.LeaveManagement.Presentation.Services.Base;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using System.Reflection;
 
 WebApplicationBuilder applicationBuilder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-applicationBuilder.Services.AddControllersWithViews();
-applicationBuilder.Services.AddHttpClient<IClient, Client>(key => key.BaseAddress = new Uri("https://localhost:7151"));
+applicationBuilder.Services.AddHttpClient<IClient, Client>(key => key.BaseAddress = new Uri("https://localhost:7271"));
+//applicationBuilder.Services.AddSingleton<IClient, Client>();
 applicationBuilder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+applicationBuilder.Services.AddScoped<ILeaveTypeService, LeaveTypeService>();
 
 applicationBuilder.Services.AddSingleton<ILocalStorageService, LocalStorageService>();
-applicationBuilder.Services.AddScoped<ILeaveTypeService, LeaveTypeService>();
+applicationBuilder.Services.AddControllersWithViews();
 
 WebApplication webApplication = applicationBuilder.Build();
 

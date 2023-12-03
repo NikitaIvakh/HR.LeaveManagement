@@ -1,6 +1,7 @@
 ﻿using HR.LeaveManagement.Application.DTOs.LeaveAllLocation;
 using HR.LeaveManagement.Application.Features.LeaveAllLocations.Requests.Commands;
 using HR.LeaveManagement.Application.Features.LeaveAllLocations.Requests.Queries;
+using HR.LeaveManagement.Application.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,33 +21,33 @@ namespace HR.LeaveManagement.API.Controllers
         }
 
         // GET: api/<LeaveAllLocationsController>
-        [HttpGet("GetLeaveAllLocations")]
-        public async Task<ActionResult<List<LeaveAllLocationDto>>> GetLeaveAllLocations()
+        [HttpGet]
+        public async Task<ActionResult<List<LeaveAllLocationDto>>> Get()
         {
-            var leaveAllLocations = await _mediator.Send(new GetLeaveAllLocationListRequest());
+            List<LeaveAllLocationDto> leaveAllLocations = await _mediator.Send(new GetLeaveAllLocationListRequest());
             return Ok(leaveAllLocations);
         }
 
         // GET api/<LeaveAllLocationsController>/5
-        [HttpGet("GetLeaveAllLocation/{id}")]
-        public async Task<ActionResult<LeaveAllLocationDto>> GetLeaveAllLocation(int id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<LeaveAllLocationDto>> Get(int id)
         {
-            var leaveAllLocation = await _mediator.Send(new GetLeaveAllLocationDetailsRequest() { Id = id });
+            LeaveAllLocationDto leaveAllLocation = await _mediator.Send(new GetLeaveAllLocationDetailsRequest() { Id = id });
             return Ok(leaveAllLocation);
         }
 
         // POST api/<LeaveAllLocationsController>
-        [HttpPost("CreateLeaveAllLocation")]
-        public async Task<ActionResult<LeaveAllLocationDto>> CreateLeaveAllLocation([FromBody] CreateLeaveAllLocationDto leaveAllLocationDto)
+        [HttpPost]
+        public async Task<ActionResult<BaseCommandResponse>> Post([FromBody] CreateLeaveAllLocationDto leaveAllLocationDto)
         {
-            var command = new CreateLeaveAllLocationsCommand() { LeaveAllLocationDto = leaveAllLocationDto };
-            var response = await _mediator.Send(command);
+            CreateLeaveAllLocationsCommand command = new() { LeaveAllLocationDto = leaveAllLocationDto };
+            BaseCommandResponse response = await _mediator.Send(command);
             return Ok(response);
         }
 
         // PUT api/<LeaveAllLocationsController>/5
-        [HttpPut("UpdateLeaveAllLocation/{id}")]
-        public async Task<ActionResult> UpdateLeaveAllLocation([FromBody] UpdateLeaveAllLocationDto leaveAllLocationDto)
+        [HttpPut]
+        public async Task<ActionResult> Put([FromBody] UpdateLeaveAllLocationDto leaveAllLocationDto)
         {
             var command = new UpdateLeaveAllLocationsCommand() { LeaveAllLocationDto = leaveAllLocationDto };
             await _mediator.Send(command);
@@ -54,8 +55,8 @@ namespace HR.LeaveManagement.API.Controllers
         }
 
         // DELETE api/<LeaveAllLocationsController>/5
-        [HttpDelete("DeleteLeaveAllLocation/{id}")]
-        public async Task<ActionResult> DeleteLeaveAllLocation(int id)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
         {
             var command = new DeleteLeaveAllLocationsCommand() { Id = id };
             await _mediator.Send(command);

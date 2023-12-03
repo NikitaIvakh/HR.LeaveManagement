@@ -5,14 +5,14 @@ namespace HR.LeaveManagement.Presentation.Contracts
 {
     public interface ILeaveTypeService
     {
-        Task<List<LeaveTypeViewModel>> GetLeaveTypes();
+        Task<List<LeaveTypeViewModel>> GetLeaveTypesAsync();
 
-        Task<LeaveTypeViewModel> GetLeaveType(int id);
+        Task<LeaveTypeViewModel> GetLeaveTypeAsync(int id);
 
-        Task<BaseResponse<int>> CreateLeaveType(CreateLeaveTypeViewModel leaveType);
+        Task<BaseResponse<int>> CreateLeaveTypeAsync(CreateLeaveTypeViewModel leaveType);
 
-        Task<BaseResponse<int>> UpdateLeaveType(int id, LeaveTypeViewModel leaveType);
+        Task<BaseResponse<int>> UpdateLeaveTypeAsync(int id, LeaveTypeViewModel leaveType);
 
-        Task<BaseResponse<int>> DeleteLeaveType(int id);
+        Task<BaseResponse<int>> DeleteLeaveTypeAsync(int id);
     }
 }
