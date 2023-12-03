@@ -11,6 +11,7 @@ applicationBuilder.Services.AddHttpClient<IClient, Client>(key => key.BaseAddres
 applicationBuilder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 applicationBuilder.Services.AddSingleton<ILocalStorageService, LocalStorageService>();
+applicationBuilder.Services.AddScoped<ILeaveTypeService, LeaveTypeService>();
 
 WebApplication webApplication = applicationBuilder.Build();
 
