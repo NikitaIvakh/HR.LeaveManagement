@@ -20,6 +20,13 @@ namespace HR.LeaveManagement.Persistence
             services.AddScoped<ILeaveRequestRepository, LeaveRequestRepository>();
             services.AddScoped<ILeaveAllLocationRepository, LeaveAllLocationRepository>();
 
+            var serviceProvider = services.BuildServiceProvider();
+            using (var scope = serviceProvider.CreateScope())
+            {
+                var dbContext = scope.ServiceProvider.GetRequiredService<HRLeaveManagementDbContext>();
+                dbContext.Database.Migrate();
+            }
+
             return services;
         }
     }
