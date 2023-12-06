@@ -13,10 +13,6 @@ AddSwaggerDock(applicationBuilder.Services);
 applicationBuilder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 applicationBuilder.Services.AddEndpointsApiExplorer();
-applicationBuilder.Services.AddSwaggerGen(key =>
-{
-    key.SwaggerDoc("v1", new OpenApiInfo { Title = "HR LeaveManagement API", Version = "v1" });
-});
 
 applicationBuilder.Services.ConfigureApplicationServices();
 applicationBuilder.Services.ConfigurePersistenceServices(applicationBuilder.Configuration);
