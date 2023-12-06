@@ -20,7 +20,7 @@ namespace HR.LeaveManagement.Identity
 
             services.AddDbContext<HRLeaveManagementIdentityDbContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("HRLeaveManagementIdentityConneсtionString"),
+                options.UseSqlServer(configuration.GetConnectionString("HRLeaveManagementIdentityConnectionString"),
                 key => key.MigrationsAssembly(typeof(HRLeaveManagementIdentityDbContext).Assembly.FullName));
             });
 
