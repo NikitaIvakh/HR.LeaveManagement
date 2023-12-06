@@ -1,4 +1,5 @@
 using HR.LeaveManagement.Application;
+using HR.LeaveManagement.Identity;
 using HR.LeaveManagement.Infrastructure;
 using HR.LeaveManagement.Persistence;
 using Microsoft.OpenApi.Models;
@@ -18,6 +19,7 @@ applicationBuilder.Services.AddSwaggerGen(key =>
 applicationBuilder.Services.ConfigureApplicationServices();
 applicationBuilder.Services.ConfigurePersistenceServices(applicationBuilder.Configuration);
 applicationBuilder.Services.ConfigureInfrastructureServices(applicationBuilder.Configuration);
+applicationBuilder.Services.ConfigureIdentityServices(applicationBuilder.Configuration);
 
 applicationBuilder.Services.AddCors(key =>
 {
@@ -35,17 +37,13 @@ if (webApplication.Environment.IsDevelopment())
     webApplication.UseDeveloperExceptionPage();
 }
 
+webApplication.UseAuthentication();
 webApplication.UseSwagger();
 webApplication.UseSwaggerUI(key => key.SwaggerEndpoint("/swagger/v1/swagger.json", "HR LeaveManagement API"));
-
 webApplication.UseHttpsRedirection();
-
 webApplication.UseRouting();
-
 webApplication.UseAuthorization();
-
 webApplication.UseCors("CorsPolicy");
-
 webApplication.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
