@@ -3,10 +3,12 @@ using HR.LeaveManagement.Application.Features.LeaveTypes.Requests.Commands;
 using HR.LeaveManagement.Application.Features.LeaveTypes.Requests.Queries;
 using HR.LeaveManagement.Application.Responses;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HR.LeaveManagement.API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class LeaveTypesController : ControllerBase
@@ -36,6 +38,7 @@ namespace HR.LeaveManagement.API.Controllers
 
         // POST api/<LeaveTypesController>
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<BaseCommandResponse>> Post([FromBody] CreateLeaveTypeDto leaveTypeDto)
         {
             CreateLeaveTypeCommand command = new() { LeaveTypeDto = leaveTypeDto };
@@ -45,6 +48,7 @@ namespace HR.LeaveManagement.API.Controllers
 
         // PUT api/<LeaveTypesController>
         [HttpPut("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> Put([FromBody] LeaveTypeDto leaveTypeDto)
         {
             UpdateLeaveTypeCommand command = new() { LeaveTypeDto = leaveTypeDto };
@@ -54,6 +58,7 @@ namespace HR.LeaveManagement.API.Controllers
 
         // DELETE api/<LeaveTypesController>/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> Delete(int id)
         {
             DeleteLeaveTypeCommand command = new() { Id = id };
