@@ -20,12 +20,14 @@ namespace HR.LeaveManagement.Presentation.Services
 
         public async Task<List<LeaveTypeViewModel>> GetLeaveTypesAsync()
         {
+            AddBearerToken();
             var leaveTypes = await _client.LeaveTypesAllAsync();
             return _mapper.Map<List<LeaveTypeViewModel>>(leaveTypes);
         }
 
         public async Task<LeaveTypeViewModel> GetLeaveTypeAsync(int id)
         {
+            AddBearerToken();
             LeaveTypeDto leaveType = await _client.LeaveTypesGETAsync(id);
             return _mapper.Map<LeaveTypeViewModel>(leaveType);
         }
@@ -36,6 +38,7 @@ namespace HR.LeaveManagement.Presentation.Services
             {
                 BaseResponse<int> response = new();
                 CreateLeaveTypeDto createLeaveTypeDto = _mapper.Map<CreateLeaveTypeDto>(leaveType);
+                AddBearerToken();
                 BaseCommandResponse apiResponse = await _client.LeaveTypesPOSTAsync(createLeaveTypeDto);
 
                 if (apiResponse.Success)
@@ -66,6 +69,7 @@ namespace HR.LeaveManagement.Presentation.Services
             try
             {
                 LeaveTypeDto leaveTypeDto = _mapper.Map<LeaveTypeDto>(leaveType);
+                AddBearerToken();
                 await _client.LeaveTypesPUTAsync(id.ToString(), leaveTypeDto);
                 return new BaseResponse<int> { Status = true };
             }
@@ -80,6 +84,7 @@ namespace HR.LeaveManagement.Presentation.Services
         {
             try
             {
+                AddBearerToken();
                 await _client.LeaveTypesDELETEAsync(id);
                 return new BaseResponse<int> { Status = true };
             }
