@@ -1,10 +1,12 @@
 ﻿using HR.LeaveManagement.Presentation.Contracts;
 using HR.LeaveManagement.Presentation.Models;
 using HR.LeaveManagement.Presentation.Services.Base;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HR.LeaveManagement.Presentation.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class LeaveTypesController : Controller
     {
         private readonly ILeaveTypeService _leaveTypeService;
