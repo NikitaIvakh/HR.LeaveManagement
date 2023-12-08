@@ -1,4 +1,5 @@
-﻿using HR.LeaveManagement.Presentation.Contracts;
+﻿using AutoMapper;
+using HR.LeaveManagement.Presentation.Contracts;
 using HR.LeaveManagement.Presentation.Models;
 using HR.LeaveManagement.Presentation.Services.Base;
 using Microsoft.AspNetCore.Authentication;
@@ -12,18 +13,20 @@ namespace HR.LeaveManagement.Presentation.Services
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly JwtSecurityTokenHandler _jwtSecurityTokenHandler;
+        private readonly IMapper _mapper;
 
-        public AuthenticationService(ILocalStorageService localStorageService, IClient client, IHttpContextAccessor httpContextAccessor) : base(localStorageService, client)
+        public AuthenticationService(ILocalStorageService localStorageService, IClient client, IHttpContextAccessor httpContextAccessor, IMapper mapper) : base(localStorageService, client)
         {
             _httpContextAccessor = httpContextAccessor;
             _jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
+            _mapper = mapper;
         }
 
         public async Task<bool> Authenticate(LoginViewModel loginViewModel)
         {
             try
             {
-                AuthRequest authRequest = new() { Email = loginViewModel.Email, Password = loginViewModel.Password };
+                AuthRequest authRequest = _mapper.Map<AuthRequest>(loginViewModel);
                 AuthResponse authenticateResposne = await _client.LoginAsync(authRequest);
 
                 if (authenticateResposne.Token != string.Empty)
@@ -48,15 +51,7 @@ namespace HR.LeaveManagement.Presentation.Services
 
         public async Task<bool> Register(RegisterViewModel registerViewModel)
         {
-            RegistrationRequest registrationRequest = new()
-            {
-                FirstName = registerViewModel.FirstName,
-                LastName = registerViewModel.LastName,
-                UserName = registerViewModel.UserName,
-                EmailAddress = registerViewModel.EmailAddress,
-                Password = registerViewModel.Password
-            };
-
+            RegistrationRequest registrationRequest = _mapper.Map<RegistrationRequest>(registerViewModel);
             RegistrationResponse response = await _client.RegisterAsync(registrationRequest);
 
             if (!string.IsNullOrEmpty(response.UserId))
