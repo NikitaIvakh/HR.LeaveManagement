@@ -10,6 +10,7 @@ namespace HR.LeaveManagement.Presentation
         {
             CreateMap<CreateLeaveTypeDto, CreateLeaveTypeViewModel>().ReverseMap();
             CreateMap<LeaveTypeDto, LeaveTypeViewModel>().ReverseMap();
+            CreateMap<RegisterViewModel, RegistrationRequest>();
         }
     }
 }
