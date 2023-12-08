@@ -57,5 +57,13 @@ namespace HR.LeaveManagement.Presentation.Controllers
             ModelState.AddModelError(string.Empty, "Registration Attempt Failed. Please try again");
             return View(registerViewModel);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Logout(string returnUrl)
+        {
+            returnUrl ??= Url.Content("~/");
+            await _authenticationService.Logout();
+            return LocalRedirect(returnUrl);
+        }
     }
 }
