@@ -1,4 +1,5 @@
 ﻿using HR.LeaveManagement.Presentation.Contracts;
+using HR.LeaveManagement.Presentation.Models;
 using HR.LeaveManagement.Presentation.Services.Base;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -18,11 +19,11 @@ namespace HR.LeaveManagement.Presentation.Services
             _jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
         }
 
-        public async Task<bool> Authenticate(string email, string password)
+        public async Task<bool> Authenticate(LoginViewModel loginViewModel)
         {
             try
             {
-                AuthRequest authRequest = new() { Email = email, Password = password };
+                AuthRequest authRequest = new() { Email = loginViewModel.Email, Password = loginViewModel.Password };
                 AuthResponse authenticateResposne = await _client.LoginAsync(authRequest);
 
                 if (authenticateResposne.Token != string.Empty)
@@ -45,9 +46,17 @@ namespace HR.LeaveManagement.Presentation.Services
             }
         }
 
-        public async Task<bool> Register(string firstName, string lastName, string userName, string email, string password)
+        public async Task<bool> Register(RegisterViewModel registerViewModel)
         {
-            RegistrationRequest registrationRequest = new() { FirstName = firstName, LastName = lastName, UserName = userName, EmailAddress = email, Password = password };
+            RegistrationRequest registrationRequest = new()
+            {
+                FirstName = registerViewModel.FirstName,
+                LastName = registerViewModel.LastName,
+                UserName = registerViewModel.UserName,
+                EmailAddress = registerViewModel.EmailAddress,
+                Password = registerViewModel.Password
+            };
+
             RegistrationResponse response = await _client.RegisterAsync(registrationRequest);
 
             if (!string.IsNullOrEmpty(response.UserId))

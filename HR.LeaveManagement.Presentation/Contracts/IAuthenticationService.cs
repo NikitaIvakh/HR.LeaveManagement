@@ -1,10 +1,12 @@
-﻿namespace HR.LeaveManagement.Presentation.Contracts
+﻿using HR.LeaveManagement.Presentation.Models;
+
+namespace HR.LeaveManagement.Presentation.Contracts
 {
     public interface IAuthenticationService
     {
-        Task<bool> Authenticate(string email, string password);
+        Task<bool> Authenticate(LoginViewModel loginViewModel);
 
-        Task<bool> Register(string firstName, string lastName, string userName, string email, string password);
+        Task<bool> Register(RegisterViewModel registerViewModel);
 
         Task Logout();
     }
