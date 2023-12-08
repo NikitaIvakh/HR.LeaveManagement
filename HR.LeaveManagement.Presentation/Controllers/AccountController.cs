@@ -13,6 +13,7 @@ namespace HR.LeaveManagement.Presentation.Controllers
             _authenticationService = authenticationService;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Login(string returnUrl = null)
         {
             return View();
@@ -21,37 +22,33 @@ namespace HR.LeaveManagement.Presentation.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel loginViewModel, string returnUrl)
         {
-            if (ModelState.IsValid)
-            {
-                returnUrl ??= Url.Content("~/");
-                var isLoggedIn = await _authenticationService.Authenticate(loginViewModel);
+            returnUrl ??= Url.Content("~/");
+            var isLoggedIn = await _authenticationService.Authenticate(loginViewModel);
 
-                if (isLoggedIn)
-                {
-                    return LocalRedirect(returnUrl);
-                }
+            if (isLoggedIn)
+            {
+                return LocalRedirect(returnUrl);
             }
 
             ModelState.AddModelError(string.Empty, "Log In Attempt Failed. Pleace try again.");
             return View(loginViewModel);
         }
 
+        [HttpGet]
         public async Task<IActionResult> Register()
         {
             return View();
         }
 
+        [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel registerViewModel)
         {
-            if (ModelState.IsValid)
-            {
-                var returnUrl = Url.Content("~/");
-                var isCreated = await _authenticationService.Register(registerViewModel);
+            var returnUrl = Url.Content("~/");
+            var isCreated = await _authenticationService.Register(registerViewModel);
 
-                if (isCreated)
-                {
-                    return LocalRedirect(returnUrl);
-                }
+            if (isCreated)
+            {
+                return LocalRedirect(returnUrl);
             }
 
             ModelState.AddModelError(string.Empty, "Registration Attempt Failed. Please try again");
