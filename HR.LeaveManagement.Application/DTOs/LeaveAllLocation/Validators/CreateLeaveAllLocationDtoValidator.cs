@@ -5,12 +5,19 @@ namespace HR.LeaveManagement.Application.DTOs.LeaveAllLocation.Validators
 {
     public class CreateLeaveAllLocationDtoValidator : AbstractValidator<CreateLeaveAllLocationDto>
     {
-        private readonly ILeaveAllLocationRepository _leaveAllLocationRepository;
+        private readonly ILeaveTypeRepository _leaveTypeRepository;
 
-        public CreateLeaveAllLocationDtoValidator(ILeaveAllLocationRepository leaveAllLocationRepository)
+        public CreateLeaveAllLocationDtoValidator(ILeaveTypeRepository leaveTypeRepository)
         {
-            _leaveAllLocationRepository = leaveAllLocationRepository;
-            Include(new ILeaveAllLocationDtoValidator(_leaveAllLocationRepository));
+            _leaveTypeRepository = leaveTypeRepository;
+
+            RuleFor(key => key.LeaveTypeId)
+                .GreaterThan(0)
+                .MustAsync(async (id, token) =>
+                {
+                    var leaveTypeExists = await _leaveTypeRepository.Exists(id);
+                    return !leaveTypeExists;
+                }).WithMessage("{PropertyName} does not exists");
         }
     }
 }
