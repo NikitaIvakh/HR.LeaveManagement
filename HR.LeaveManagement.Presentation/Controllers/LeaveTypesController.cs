@@ -10,10 +10,12 @@ namespace HR.LeaveManagement.Presentation.Controllers
     public class LeaveTypesController : Controller
     {
         private readonly ILeaveTypeService _leaveTypeService;
+        private readonly ILeaveAllLocationService _leaveAllLocationService;
 
-        public LeaveTypesController(ILeaveTypeService leaveTypeService)
+        public LeaveTypesController(ILeaveTypeService leaveTypeService, ILeaveAllLocationService leaveAllLocationService)
         {
             _leaveTypeService = leaveTypeService;
+            _leaveAllLocationService = leaveAllLocationService;
         }
 
         // GET: LeaveTypesController
@@ -106,6 +108,29 @@ namespace HR.LeaveManagement.Presentation.Controllers
                 }
 
                 ModelState.AddModelError(string.Empty, response.ValidationErrors);
+            }
+
+            catch (Exception exception)
+            {
+                ModelState.AddModelError(string.Empty, exception.Message);
+            }
+
+            return BadRequest();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AllLocate(int id)
+        {
+            try
+            {
+                BaseResponse<int> response = await _leaveAllLocationService.CreateLeaveAllLocationAsync(id);
+                if (response.Status is true)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+
+                ModelState.AddModelError(string.Empty, response.Message);
             }
 
             catch (Exception exception)
