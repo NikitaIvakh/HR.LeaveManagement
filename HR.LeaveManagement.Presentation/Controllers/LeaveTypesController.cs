@@ -125,12 +125,7 @@ namespace HR.LeaveManagement.Presentation.Controllers
             try
             {
                 BaseResponse<int> response = await _leaveAllLocationService.CreateLeaveAllLocationAsync(id);
-                if (response.Status is true)
-                {
-                    return RedirectToAction(nameof(Index));
-                }
-
-                ModelState.AddModelError(string.Empty, response.Message);
+                return RedirectToAction(nameof(Index));
             }
 
             catch (Exception exception)
