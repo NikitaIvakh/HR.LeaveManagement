@@ -12,6 +12,7 @@ applicationBuilder.Services.AddHttpClient<IClient, Client>(key => key.BaseAddres
 //applicationBuilder.Services.AddSingleton<IClient, Client>();
 applicationBuilder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 applicationBuilder.Services.AddScoped<ILeaveTypeService, LeaveTypeService>();
+applicationBuilder.Services.AddScoped<ILeaveAllLocationService, LeaveAllLocationService>();
 
 applicationBuilder.Services.Configure<CookiePolicyOptions>(options =>
 {
