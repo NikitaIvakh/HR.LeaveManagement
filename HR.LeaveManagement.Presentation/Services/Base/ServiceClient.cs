@@ -168,21 +168,21 @@ namespace HR.LeaveManagement.Presentation.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task LeaveTypesPUTAsync(string id, LeaveTypeDto body);
+        System.Threading.Tasks.Task<BaseCommandResponse> LeaveTypesPUTAsync(string id, UpdateLeaveTypesDto body);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task LeaveTypesPUTAsync(string id, LeaveTypeDto body, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<BaseCommandResponse> LeaveTypesPUTAsync(string id, UpdateLeaveTypesDto body, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task LeaveTypesDELETEAsync(int id);
+        System.Threading.Tasks.Task<BaseCommandResponse> LeaveTypesDELETEAsync(string id, DeleteLeaveTypeDto body);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task LeaveTypesDELETEAsync(int id, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<BaseCommandResponse> LeaveTypesDELETEAsync(string id, DeleteLeaveTypeDto body, System.Threading.CancellationToken cancellationToken);
 
     }
 
@@ -1489,7 +1489,7 @@ namespace HR.LeaveManagement.Presentation.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task LeaveTypesPUTAsync(string id, LeaveTypeDto body)
+        public virtual System.Threading.Tasks.Task<BaseCommandResponse> LeaveTypesPUTAsync(string id, UpdateLeaveTypesDto body)
         {
             return LeaveTypesPUTAsync(id, body, System.Threading.CancellationToken.None);
         }
@@ -1497,7 +1497,7 @@ namespace HR.LeaveManagement.Presentation.Services.Base
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task LeaveTypesPUTAsync(string id, LeaveTypeDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<BaseCommandResponse> LeaveTypesPUTAsync(string id, UpdateLeaveTypesDto body, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -1513,6 +1513,7 @@ namespace HR.LeaveManagement.Presentation.Services.Base
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("PUT");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                 
@@ -1545,7 +1546,12 @@ namespace HR.LeaveManagement.Presentation.Services.Base
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<BaseCommandResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -1569,15 +1575,15 @@ namespace HR.LeaveManagement.Presentation.Services.Base
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task LeaveTypesDELETEAsync(int id)
+        public virtual System.Threading.Tasks.Task<BaseCommandResponse> LeaveTypesDELETEAsync(string id, DeleteLeaveTypeDto body)
         {
-            return LeaveTypesDELETEAsync(id, System.Threading.CancellationToken.None);
+            return LeaveTypesDELETEAsync(id, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task LeaveTypesDELETEAsync(int id, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<BaseCommandResponse> LeaveTypesDELETEAsync(string id, DeleteLeaveTypeDto body, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -1588,7 +1594,12 @@ namespace HR.LeaveManagement.Presentation.Services.Base
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("DELETE");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                 
@@ -1621,7 +1632,12 @@ namespace HR.LeaveManagement.Presentation.Services.Base
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<BaseCommandResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -1839,6 +1855,14 @@ namespace HR.LeaveManagement.Presentation.Services.Base
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.0.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class DeleteLeaveTypeDto
+    {
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Id { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.0.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class LeaveAllLocationDto
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -1996,6 +2020,20 @@ namespace HR.LeaveManagement.Presentation.Services.Base
 
         [Newtonsoft.Json.JsonProperty("cancelled", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool Cancelled { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.0.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class UpdateLeaveTypesDto
+    {
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Id { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Name { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("defaultDays", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int DefaultDays { get; set; }
 
     }
 

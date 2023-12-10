@@ -3,25 +3,50 @@ using HR.LeaveManagement.Application.Features.LeaveTypes.Requests.Commands;
 using HR.LeaveManagement.Application.Contracts.Persistence;
 using HR.LeaveManagement.Domain;
 using MediatR;
+using HR.LeaveManagement.Application.Responses;
+using HR.LeaveManagement.Application.DTOs.LeaveType.Validator;
+using AutoMapper;
 
 namespace HR.LeaveManagement.Application.Features.LeaveTypes.Handlers.Commands
 {
-    public class DeleteLeaveTypeCommandHandler : IRequestHandler<DeleteLeaveTypeCommand, Unit>
+    public class DeleteLeaveTypeCommandHandler : IRequestHandler<DeleteLeaveTypeCommand, BaseCommandResponse>
     {
         private readonly ILeaveTypeRepository _leaveTypeRepository;
+        private readonly IMapper _mapper;
 
-        public DeleteLeaveTypeCommandHandler(ILeaveTypeRepository leaveTypeRepository)
+        public DeleteLeaveTypeCommandHandler(ILeaveTypeRepository leaveTypeRepository, IMapper mapper)
         {
             _leaveTypeRepository = leaveTypeRepository;
+            _mapper = mapper;
         }
 
-        public async Task<Unit> Handle(DeleteLeaveTypeCommand request, CancellationToken cancellationToken)
+        public async Task<BaseCommandResponse> Handle(DeleteLeaveTypeCommand request, CancellationToken cancellationToken)
         {
-            var leaveType = await _leaveTypeRepository.GetAsync(request.Id) 
-                ?? throw new NotFoundException(nameof(LeaveType), request.Id);
+            var response = new BaseCommandResponse();
+            var validator = new DeleteLeaveTypeDtoValidator();
+            var validationResult = await validator.ValidateAsync(request.DeleteLeaveTypeDto, cancellationToken);
 
-            await _leaveTypeRepository.DeleteAsync(leaveType);
-            return Unit.Value;
+            if (validationResult.IsValid is false)
+            {
+                response.Success = false;
+                response.Message = "Delete Failed";
+                response.Errors = validationResult.Errors.Select(x => x.ErrorMessage).ToList();
+            }
+
+            else
+            {
+                var leaveType = await _leaveTypeRepository.GetAsync(request.DeleteLeaveTypeDto.Id)
+                    ?? throw new NotFoundException(nameof(LeaveType), request.DeleteLeaveTypeDto.Id);
+
+                _mapper.Map(request.DeleteLeaveTypeDto, leaveType);
+                await _leaveTypeRepository.DeleteAsync(leaveType);
+
+                response.Success = true;
+                response.Message = "Delete Successful";
+                response.Id = leaveType.Id;
+            }
+
+            return response;
         }
     }
 }

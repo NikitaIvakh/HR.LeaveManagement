@@ -1,4 +1,4 @@
-﻿using HR.LeaveManagement.Presentation.Models;
+﻿using HR.LeaveManagement.Presentation.Models.LeaveTypes;
 using HR.LeaveManagement.Presentation.Services.Base;
 
 namespace HR.LeaveManagement.Presentation.Contracts
@@ -11,8 +11,8 @@ namespace HR.LeaveManagement.Presentation.Contracts
 
         Task<BaseResponse<int>> CreateLeaveTypeAsync(CreateLeaveTypeViewModel leaveType);
 
-        Task<BaseResponse<int>> UpdateLeaveTypeAsync(int id, LeaveTypeViewModel leaveType);
+        Task<BaseResponse<int>> UpdateLeaveTypeAsync(int id, UpdateLeaveTypeViewModel updateLeaveTypeViewModel);
 
-        Task<BaseResponse<int>> DeleteLeaveTypeAsync(int id);
+        Task<BaseResponse<int>> DeleteLeaveTypeAsync(int id, DeleteLeaveTypeViewModel leaveTypeViewModel);
     }
 }

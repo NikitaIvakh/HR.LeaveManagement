@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using HR.LeaveManagement.Presentation.Contracts;
-using HR.LeaveManagement.Presentation.Models;
+using HR.LeaveManagement.Presentation.Models.LeaveTypes;
 using HR.LeaveManagement.Presentation.Services.Base;
 
 namespace HR.LeaveManagement.Presentation.Services
@@ -64,14 +64,30 @@ namespace HR.LeaveManagement.Presentation.Services
             }
         }
 
-        public async Task<BaseResponse<int>> UpdateLeaveTypeAsync(int id, LeaveTypeViewModel leaveType)
+        public async Task<BaseResponse<int>> UpdateLeaveTypeAsync(int id, UpdateLeaveTypeViewModel updateLeaveTypeViewModel)
         {
             try
             {
-                LeaveTypeDto leaveTypeDto = _mapper.Map<LeaveTypeDto>(leaveType);
+                BaseResponse<int> response = new();
+                UpdateLeaveTypesDto leaveTypeDto = _mapper.Map<UpdateLeaveTypesDto>(updateLeaveTypeViewModel);
                 AddBearerToken();
-                await _client.LeaveTypesPUTAsync(id.ToString(), leaveTypeDto);
-                return new BaseResponse<int> { Status = true };
+                BaseCommandResponse apiResponse = await _client.LeaveTypesPUTAsync(id.ToString(), leaveTypeDto);
+
+                if (apiResponse.Success)
+                {
+                    response.Data = apiResponse.Id;
+                    response.Status = true;
+                }
+
+                else
+                {
+                    foreach (string error in apiResponse.Errors)
+                    {
+                        response.ValidationErrors += error + Environment.NewLine;
+                    }
+                }
+
+                return response;
             }
 
             catch (ApiException apiException)
@@ -80,13 +96,30 @@ namespace HR.LeaveManagement.Presentation.Services
             }
         }
 
-        public async Task<BaseResponse<int>> DeleteLeaveTypeAsync(int id)
+        public async Task<BaseResponse<int>> DeleteLeaveTypeAsync(int id, DeleteLeaveTypeViewModel deleteLeaveTypeViewModel)
         {
             try
             {
+                BaseResponse<int> response = new();
+                DeleteLeaveTypeDto deleteLeaveTypeDto = _mapper.Map<DeleteLeaveTypeDto>(deleteLeaveTypeViewModel);
                 AddBearerToken();
-                await _client.LeaveTypesDELETEAsync(id);
-                return new BaseResponse<int> { Status = true };
+                BaseCommandResponse apiResponse = await _client.LeaveTypesDELETEAsync(id.ToString(), deleteLeaveTypeDto);
+
+                if (apiResponse.Success)
+                {
+                    response.Data = apiResponse.Id;
+                    response.Status = true;
+                }
+
+                else
+                {
+                    foreach (string error in apiResponse.Errors)
+                    {
+                        response.ValidationErrors += error + Environment.NewLine;
+                    }
+                }
+
+                return response;
             }
 
             catch (ApiException apiException)

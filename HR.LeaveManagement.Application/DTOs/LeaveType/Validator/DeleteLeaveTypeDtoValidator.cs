@@ -2,11 +2,10 @@
 
 namespace HR.LeaveManagement.Application.DTOs.LeaveType.Validator
 {
-    public class UpdateLeaveTypeDtoValidator : AbstractValidator<UpdateLeaveTypesDto>
+    public class DeleteLeaveTypeDtoValidator : AbstractValidator<DeleteLeaveTypeDto>
     {
-        public UpdateLeaveTypeDtoValidator()
+        public DeleteLeaveTypeDtoValidator()
         {
-            Include(new ILeaveTypeDtoValidator());
             RuleFor(p => p.Id).NotNull().WithMessage("{PropertyName} must be present");
         }
     }

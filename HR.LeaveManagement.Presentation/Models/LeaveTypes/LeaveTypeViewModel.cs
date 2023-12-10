@@ -1,14 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace HR.LeaveManagement.Presentation.Models
+namespace HR.LeaveManagement.Presentation.Models.LeaveTypes
 {
-    public class LeaveTypeViewModel : CreateLeaveTypeViewModel
+    public class LeaveTypeViewModel
     {
         public int Id { get; set; }
-    }
 
-    public class CreateLeaveTypeViewModel
-    {
         [Required]
         public string Name { get; set; }
 

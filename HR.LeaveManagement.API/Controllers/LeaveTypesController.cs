@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HR.LeaveManagement.API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize(Roles = "Administrator")]
     public class LeaveTypesController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -49,21 +49,21 @@ namespace HR.LeaveManagement.API.Controllers
         // PUT api/<LeaveTypesController>
         [HttpPut("{id}")]
         [Authorize(Roles = "Administrator")]
-        public async Task<ActionResult> Put([FromBody] LeaveTypeDto leaveTypeDto)
+        public async Task<ActionResult<BaseCommandResponse>> Put([FromBody] UpdateLeaveTypesDto updateLeaveTypeDto)
         {
-            UpdateLeaveTypeCommand command = new() { LeaveTypeDto = leaveTypeDto };
-            await _mediator.Send(command);
-            return NoContent();
+            UpdateLeaveTypeCommand command = new() { LeaveTypeDto = updateLeaveTypeDto };
+            BaseCommandResponse response = await _mediator.Send(command);
+            return Ok(response);
         }
 
         // DELETE api/<LeaveTypesController>/5
         [HttpDelete("{id}")]
         [Authorize(Roles = "Administrator")]
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult<BaseCommandResponse>> Delete(DeleteLeaveTypeDto deleteLeaveTypeDto)
         {
-            DeleteLeaveTypeCommand command = new() { Id = id };
-            await _mediator.Send(command);
-            return NoContent();
+            DeleteLeaveTypeCommand command = new() { DeleteLeaveTypeDto = deleteLeaveTypeDto };
+            BaseCommandResponse response = await _mediator.Send(command);
+            return Ok(response);
         }
     }
 }

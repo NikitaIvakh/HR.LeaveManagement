@@ -1,5 +1,5 @@
 ﻿using HR.LeaveManagement.Presentation.Contracts;
-using HR.LeaveManagement.Presentation.Models;
+using HR.LeaveManagement.Presentation.Models.LeaveTypes;
 using HR.LeaveManagement.Presentation.Services.Base;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -64,6 +64,7 @@ namespace HR.LeaveManagement.Presentation.Controllers
         }
 
         // GET: LeaveTypesController/Edit/5
+        [HttpGet]
         public async Task<ActionResult> Edit(int id)
         {
             LeaveTypeViewModel leaveType = await _leaveTypeService.GetLeaveTypeAsync(id);
@@ -73,7 +74,7 @@ namespace HR.LeaveManagement.Presentation.Controllers
         // POST: LeaveTypesController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(int id, LeaveTypeViewModel leaveTypeViewModel)
+        public async Task<ActionResult> Edit(int id, UpdateLeaveTypeViewModel leaveTypeViewModel)
         {
             try
             {
@@ -94,14 +95,21 @@ namespace HR.LeaveManagement.Presentation.Controllers
             return View(leaveTypeViewModel);
         }
 
+        [HttpGet]
+        public async Task<ActionResult> Delete(int id)
+        {
+            LeaveTypeViewModel leaveType = await _leaveTypeService.GetLeaveTypeAsync(id);
+            return View(leaveType);
+        }
+
         // POST: LeaveTypesController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult> Delete(int id, DeleteLeaveTypeViewModel deleteLeaveTypeViewModel)
         {
             try
             {
-                BaseResponse<int> response = await _leaveTypeService.DeleteLeaveTypeAsync(id);
+                BaseResponse<int> response = await _leaveTypeService.DeleteLeaveTypeAsync(id, deleteLeaveTypeViewModel);
                 if (response.Status is true)
                 {
                     return RedirectToAction(nameof(Index));
@@ -125,7 +133,10 @@ namespace HR.LeaveManagement.Presentation.Controllers
             try
             {
                 BaseResponse<int> response = await _leaveAllLocationService.CreateLeaveAllLocationAsync(id);
-                return RedirectToAction(nameof(Index));
+                if (response.Status is true)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
             }
 
             catch (Exception exception)
