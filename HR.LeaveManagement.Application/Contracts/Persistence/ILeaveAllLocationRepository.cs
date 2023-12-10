@@ -11,5 +11,7 @@ namespace HR.LeaveManagement.Application.Contracts.Persistence
         Task<bool> AllLocationExists(string userId, int leaveTypeId, int period);
 
         Task AddLocation(List<LeaveAllLocation> leaveAllLocations);
+
+        Task<LeaveAllLocation> GetUserAllLocationsAsync(string userId, int leaveTypeId);
     }
 }

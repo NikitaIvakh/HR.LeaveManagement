@@ -37,5 +37,10 @@ namespace HR.LeaveManagement.Persistence.Repositories
             await _context.AddRangeAsync(leaveAllLocations);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<LeaveAllLocation> GetUserAllLocationsAsync(string userId, int leaveTypeId)
+        {
+            return await _context.LeaveAllLocations.FirstAsync(key => key.EmployeeId == userId && key.LeaveTypeId == leaveTypeId);
+        }
     }
 }
