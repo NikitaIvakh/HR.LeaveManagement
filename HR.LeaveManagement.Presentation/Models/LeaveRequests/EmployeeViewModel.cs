@@ -1,4 +1,4 @@
-﻿namespace HR.LeaveManagement.Presentation.Models
+﻿namespace HR.LeaveManagement.Presentation.Models.LeaveRequests
 {
     public class EmployeeViewModel
     {

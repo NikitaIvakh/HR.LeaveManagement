@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using HR.LeaveManagement.Presentation.Contracts;
-using HR.LeaveManagement.Presentation.Models;
+using HR.LeaveManagement.Presentation.Models.Accounts;
 using HR.LeaveManagement.Presentation.Services.Base;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -22,11 +22,11 @@ namespace HR.LeaveManagement.Presentation.Services
             _mapper = mapper;
         }
 
-        public async Task<bool> Authenticate(LoginViewModel loginViewModel)
+        public async Task<bool> Authenticate(string email, string password)
         {
             try
             {
-                AuthRequest authRequest = _mapper.Map<AuthRequest>(loginViewModel);
+                AuthRequest authRequest = new() { Email = email, Password = password };
                 AuthResponse authenticateResposne = await _client.LoginAsync(authRequest);
 
                 if (authenticateResposne.Token != string.Empty)
@@ -56,6 +56,7 @@ namespace HR.LeaveManagement.Presentation.Services
 
             if (!string.IsNullOrEmpty(response.UserId))
             {
+                await Authenticate(registerViewModel.EmailAddress, registerViewModel.Password);
                 return true;
             }
 

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace HR.LeaveManagement.Presentation.Models
+namespace HR.LeaveManagement.Presentation.Models.Accounts
 {
     public class RegisterViewModel
     {

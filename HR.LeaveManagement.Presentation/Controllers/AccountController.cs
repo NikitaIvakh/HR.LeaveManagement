@@ -1,5 +1,5 @@
 ﻿using HR.LeaveManagement.Presentation.Contracts;
-using HR.LeaveManagement.Presentation.Models;
+using HR.LeaveManagement.Presentation.Models.Accounts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HR.LeaveManagement.Presentation.Controllers
@@ -20,14 +20,17 @@ namespace HR.LeaveManagement.Presentation.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel loginViewModel, string returnUrl)
+        public async Task<IActionResult> Login(LoginViewModel loginViewModel)
         {
-            returnUrl ??= Url.Content("~/");
-            var isLoggedIn = await _authenticationService.Authenticate(loginViewModel);
-
-            if (isLoggedIn)
+            if (ModelState.IsValid)
             {
-                return LocalRedirect(returnUrl);
+                loginViewModel.ReturnUrl ??= Url.Content("~/");
+                var isLoggedIn = await _authenticationService.Authenticate(loginViewModel.Email, loginViewModel.Password);
+
+                if (isLoggedIn)
+                {
+                    return LocalRedirect(loginViewModel.ReturnUrl);
+                }
             }
 
             ModelState.AddModelError(string.Empty, "Log In Attempt Failed. Pleace try again.");
@@ -43,12 +46,15 @@ namespace HR.LeaveManagement.Presentation.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel registerViewModel)
         {
-            var returnUrl = Url.Content("~/");
-            var isCreated = await _authenticationService.Register(registerViewModel);
-
-            if (isCreated)
+            if (ModelState.IsValid)
             {
-                return LocalRedirect(returnUrl);
+                var returnUrl = Url.Content("~/");
+                var isCreated = await _authenticationService.Register(registerViewModel);
+
+                if (isCreated)
+                {
+                    return LocalRedirect(returnUrl);
+                }
             }
 
             ModelState.AddModelError(string.Empty, "Registration Attempt Failed. Please try again");

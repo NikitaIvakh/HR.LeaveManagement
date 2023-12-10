@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using HR.LeaveManagement.Presentation.Models.LeaveTypes;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 
-namespace HR.LeaveManagement.Presentation.Models
+namespace HR.LeaveManagement.Presentation.Models.LeaveRequests
 {
     public class LeaveRequestViewModel : CreateRequestViewModel
     {

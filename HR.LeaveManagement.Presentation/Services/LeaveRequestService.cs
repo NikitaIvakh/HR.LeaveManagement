@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using HR.LeaveManagement.Presentation.Contracts;
-using HR.LeaveManagement.Presentation.Models;
+using HR.LeaveManagement.Presentation.Models.LeaveRequests;
 using HR.LeaveManagement.Presentation.Services.Base;
 
 namespace HR.LeaveManagement.Presentation.Services

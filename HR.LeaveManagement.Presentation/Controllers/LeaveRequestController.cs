@@ -1,5 +1,5 @@
 ﻿using HR.LeaveManagement.Presentation.Contracts;
-using HR.LeaveManagement.Presentation.Models;
+using HR.LeaveManagement.Presentation.Models.LeaveRequests;
 using HR.LeaveManagement.Presentation.Models.LeaveTypes;
 using HR.LeaveManagement.Presentation.Services.Base;
 using Microsoft.AspNetCore.Authorization;

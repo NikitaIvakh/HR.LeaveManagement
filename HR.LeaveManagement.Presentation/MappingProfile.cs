@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
-using HR.LeaveManagement.Presentation.Models;
+using HR.LeaveManagement.Presentation.Models.Accounts;
+using HR.LeaveManagement.Presentation.Models.LeaveRequests;
 using HR.LeaveManagement.Presentation.Models.LeaveTypes;
 using HR.LeaveManagement.Presentation.Services.Base;
 
