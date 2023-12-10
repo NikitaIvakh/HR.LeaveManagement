@@ -10,6 +10,7 @@ using HR.LeaveManagement.Application.Models;
 using HR.LeaveManagement.Application.Exceptions;
 using Microsoft.AspNetCore.Http;
 using System.IdentityModel.Tokens.Jwt;
+using FluentValidation.Results;
 
 namespace HR.LeaveManagement.Application.Features.LeaveRequess.Handlers.Commands
 {
@@ -19,13 +20,16 @@ namespace HR.LeaveManagement.Application.Features.LeaveRequess.Handlers.Commands
         private readonly IMapper _mapper;
         private readonly IEmailSender _emailSender;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly ILeaveAllLocationRepository _leaveAllLocationRepository;
 
-        public CreateLeaveRequessCommandHandler(ILeaveRequestRepository leaveRequestRepository, IMapper mapper, IEmailSender emailSender, IHttpContextAccessor httpContextAccessor)
+        public CreateLeaveRequessCommandHandler(ILeaveRequestRepository leaveRequestRepository, IMapper mapper, IEmailSender emailSender,
+            IHttpContextAccessor httpContextAccessor, ILeaveAllLocationRepository leaveAllLocationRepository)
         {
             _leaveRequestRepository = leaveRequestRepository;
             _mapper = mapper;
             _emailSender = emailSender;
             _httpContextAccessor = httpContextAccessor;
+            _leaveAllLocationRepository = leaveAllLocationRepository;
         }
 
         public async Task<BaseCommandResponse> Handle(CreateLeaveRequessCommand request, CancellationToken cancellationToken)
@@ -34,6 +38,14 @@ namespace HR.LeaveManagement.Application.Features.LeaveRequess.Handlers.Commands
             var validator = new CreateLeaveRequestDtoValidator(_leaveRequestRepository);
             var validatorResult = await validator.ValidateAsync(request.LeaveRequestDto, cancellationToken);
             var userId = _httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(key => key.Type == "uid")?.Value;
+
+            var leaveAllLocation = await _leaveAllLocationRepository.GetUserAllLocationsAsync(userId, request.LeaveRequestDto.LeaveTypeId);
+            int daysRequest = (int)(request.LeaveRequestDto.EndDate - request.LeaveRequestDto.StartDate).TotalDays;
+
+            if (daysRequest > leaveAllLocation.NumbersOfDays)
+            {
+                validatorResult.Errors.Add(new ValidationFailure(nameof(request.LeaveRequestDto.EndDate), "You do not have enough days for this request"));
+            }
 
             if (validatorResult.IsValid is false)
             {
