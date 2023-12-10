@@ -33,7 +33,7 @@ namespace HR.LeaveManagement.Presentation.Models
         [Display(Name = "End Date")]
         public DateTime EndDate { get; set; }
 
-        public IEnumerable<SelectListItem> LeaveTypes { get; set; }
+        public SelectList LeaveTypes { get; set; }
 
         [Display(Name = "Leave Type")]
         public int LeaveTypeId { get; set; }
