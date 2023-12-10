@@ -20,6 +20,7 @@ namespace HR.LeaveManagement.Presentation.Controllers
             _leaveRequestService = leaveRequestService;
         }
 
+        [HttpGet]
         public async Task<ActionResult> Create()
         {
             List<LeaveTypeViewModel> leaveTypes = await _leaveTypeService.GetLeaveTypesAsync();
