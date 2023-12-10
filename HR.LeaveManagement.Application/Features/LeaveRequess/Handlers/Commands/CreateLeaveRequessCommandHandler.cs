@@ -8,6 +8,8 @@ using MediatR;
 using HR.LeaveManagement.Application.Contracts.Infrastructure;
 using HR.LeaveManagement.Application.Models;
 using HR.LeaveManagement.Application.Exceptions;
+using Microsoft.AspNetCore.Http;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace HR.LeaveManagement.Application.Features.LeaveRequess.Handlers.Commands
 {
@@ -16,12 +18,14 @@ namespace HR.LeaveManagement.Application.Features.LeaveRequess.Handlers.Commands
         private readonly ILeaveRequestRepository _leaveRequestRepository;
         private readonly IMapper _mapper;
         private readonly IEmailSender _emailSender;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public CreateLeaveRequessCommandHandler(ILeaveRequestRepository leaveRequestRepository, IMapper mapper, IEmailSender emailSender)
+        public CreateLeaveRequessCommandHandler(ILeaveRequestRepository leaveRequestRepository, IMapper mapper, IEmailSender emailSender, IHttpContextAccessor httpContextAccessor)
         {
             _leaveRequestRepository = leaveRequestRepository;
             _mapper = mapper;
             _emailSender = emailSender;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<BaseCommandResponse> Handle(CreateLeaveRequessCommand request, CancellationToken cancellationToken)
@@ -29,6 +33,7 @@ namespace HR.LeaveManagement.Application.Features.LeaveRequess.Handlers.Commands
             var response = new BaseCommandResponse();
             var validator = new CreateLeaveRequestDtoValidator(_leaveRequestRepository);
             var validatorResult = await validator.ValidateAsync(request.LeaveRequestDto, cancellationToken);
+            var userId = _httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(key => key.Type == "uid")?.Value;
 
             if (validatorResult.IsValid is false)
             {
@@ -37,29 +42,35 @@ namespace HR.LeaveManagement.Application.Features.LeaveRequess.Handlers.Commands
                 response.Errors = validatorResult.Errors.Select(e => e.ErrorMessage).ToList();
             }
 
-            var leaveRequest = _mapper.Map<LeaveRequest>(request.LeaveRequestDto);
-            leaveRequest = await _leaveRequestRepository.CreateAsync(leaveRequest);
-
-            response.Success = true;
-            response.Message = "Creation Successful";
-            response.Id = leaveRequest.Id;
-
-            var email = new Email
+            else
             {
-                To = "nikita.ivakh7@gmail.com",
-                Body = $"Your leave request for {request.LeaveRequestDto.StartDate:D} to {request.LeaveRequestDto.EndDate:D} " +
-                $"has been submited successfully.",
-                Subject = "Leave request submited",
-            };
+                var leaveRequest = _mapper.Map<LeaveRequest>(request.LeaveRequestDto);
+                leaveRequest.RequestingEmployeeId = userId;
+                leaveRequest = await _leaveRequestRepository.CreateAsync(leaveRequest);
 
-            try
-            {
-                await _emailSender.SendEmailAsync(email);
-            }
+                response.Success = true;
+                response.Message = "Creation Successful";
+                response.Id = leaveRequest.Id;
 
-            catch (Exception exception)
-            {
-                throw new BadRequestException(exception.Message);
+                var emailAddress = _httpContextAccessor.HttpContext.User.FindFirst(JwtRegisteredClaimNames.Email).Value;
+
+                var email = new Email
+                {
+                    To = emailAddress,
+                    Body = $"Your leave request for {request.LeaveRequestDto.StartDate:D} to {request.LeaveRequestDto.EndDate:D} " +
+                    $"has been submited successfully.",
+                    Subject = "Leave request submited",
+                };
+
+                try
+                {
+                    await _emailSender.SendEmailAsync(email);
+                }
+
+                catch (Exception exception)
+                {
+                    throw new BadRequestException(exception.Message);
+                }
             }
 
             return response;
