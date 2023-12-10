@@ -37,15 +37,16 @@
                                         <a class="nav-link text-dark" asp-area="" asp-controller="LeaveRequest" asp-action="MyLeave">My Leave</a>
                                     </li>
                                 }
+
                                 if (User.IsInRole("Administrator"))
                                 {
                                     <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                             Manage
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                             <a class="dropdown-item text-dark" asp-controller="LeaveTypes" asp-action="Index">Leave Types</a>
-                                            <a class="dropdown-item text-dark" asp-controller="LeaveRequests" asp-action="Index">Leave Requests</a>
+                                            <a class="dropdown-item text-dark" asp-controller="LeaveRequest" asp-action="Index">Leave Requests</a>
                                         </div>
                                     </li>
                                 }
