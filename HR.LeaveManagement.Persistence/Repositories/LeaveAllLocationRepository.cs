@@ -40,7 +40,7 @@ namespace HR.LeaveManagement.Persistence.Repositories
 
         public async Task<LeaveAllLocation> GetUserAllLocationsAsync(string userId, int leaveTypeId)
         {
-            return await _context.LeaveAllLocations.FirstAsync(key => key.EmployeeId == userId && key.LeaveTypeId == leaveTypeId);
+            return await _context.LeaveAllLocations.FirstOrDefaultAsync(key => key.EmployeeId == userId && key.LeaveTypeId == leaveTypeId);
         }
     }
 }

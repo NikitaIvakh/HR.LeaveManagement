@@ -11,6 +11,7 @@ using HR.LeaveManagement.Application.Exceptions;
 using Microsoft.AspNetCore.Http;
 using System.IdentityModel.Tokens.Jwt;
 using FluentValidation.Results;
+using System.Security.Claims;
 
 namespace HR.LeaveManagement.Application.Features.LeaveRequess.Handlers.Commands
 {
@@ -21,30 +22,39 @@ namespace HR.LeaveManagement.Application.Features.LeaveRequess.Handlers.Commands
         private readonly IEmailSender _emailSender;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILeaveAllLocationRepository _leaveAllLocationRepository;
+        private readonly ILeaveTypeRepository _leaveTypeRepository;
 
         public CreateLeaveRequessCommandHandler(ILeaveRequestRepository leaveRequestRepository, IMapper mapper, IEmailSender emailSender,
-            IHttpContextAccessor httpContextAccessor, ILeaveAllLocationRepository leaveAllLocationRepository)
+            IHttpContextAccessor httpContextAccessor, ILeaveAllLocationRepository leaveAllLocationRepository, ILeaveTypeRepository leaveTypeRepository)
         {
             _leaveRequestRepository = leaveRequestRepository;
             _mapper = mapper;
             _emailSender = emailSender;
             _httpContextAccessor = httpContextAccessor;
             _leaveAllLocationRepository = leaveAllLocationRepository;
+            _leaveTypeRepository = leaveTypeRepository;
         }
 
         public async Task<BaseCommandResponse> Handle(CreateLeaveRequessCommand request, CancellationToken cancellationToken)
         {
             var response = new BaseCommandResponse();
-            var validator = new CreateLeaveRequestDtoValidator(_leaveRequestRepository);
+            var validator = new CreateLeaveRequestDtoValidator(_leaveTypeRepository);
             var validatorResult = await validator.ValidateAsync(request.LeaveRequestDto, cancellationToken);
             var userId = _httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(key => key.Type == "uid")?.Value;
 
             var leaveAllLocation = await _leaveAllLocationRepository.GetUserAllLocationsAsync(userId, request.LeaveRequestDto.LeaveTypeId);
-            int daysRequest = (int)(request.LeaveRequestDto.EndDate - request.LeaveRequestDto.StartDate).TotalDays;
 
-            if (daysRequest > leaveAllLocation.NumbersOfDays)
+            if (leaveAllLocation is null)
+                validatorResult.Errors.Add(new ValidationFailure(nameof(request.LeaveRequestDto.LeaveTypeId), "You do not have any allocations for this leave type"));
+
+            else
             {
-                validatorResult.Errors.Add(new ValidationFailure(nameof(request.LeaveRequestDto.EndDate), "You do not have enough days for this request"));
+                int daysRequest = (int)(request.LeaveRequestDto.EndDate - request.LeaveRequestDto.StartDate).TotalDays;
+
+                if (daysRequest > leaveAllLocation.NumbersOfDays)
+                {
+                    validatorResult.Errors.Add(new ValidationFailure(nameof(request.LeaveRequestDto.EndDate), "You do not have enough days for this request"));
+                }
             }
 
             if (validatorResult.IsValid is false)
@@ -64,18 +74,17 @@ namespace HR.LeaveManagement.Application.Features.LeaveRequess.Handlers.Commands
                 response.Message = "Creation Successful";
                 response.Id = leaveRequest.Id;
 
-                var emailAddress = _httpContextAccessor.HttpContext.User.FindFirst(JwtRegisteredClaimNames.Email).Value;
-
-                var email = new Email
-                {
-                    To = emailAddress,
-                    Body = $"Your leave request for {request.LeaveRequestDto.StartDate:D} to {request.LeaveRequestDto.EndDate:D} " +
-                    $"has been submited successfully.",
-                    Subject = "Leave request submited",
-                };
-
                 try
                 {
+                    var emailAddress = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Email)?.Value;
+                    var email = new Email
+                    {
+                        To = emailAddress,
+                        Body = $"Your leave request for {request.LeaveRequestDto.StartDate:D} to {request.LeaveRequestDto.EndDate:D} " +
+                        $"has been submited successfully.",
+                        Subject = "Leave request submited",
+                    };
+
                     await _emailSender.SendEmailAsync(email);
                 }
 

@@ -13,7 +13,7 @@ namespace HR.LeaveManagement.Presentation.Models.LeaveRequests
         [Display(Name = "End Date")]
         public DateTime EndDate { get; set; }
 
-        public SelectList LeaveTypes { get; set; }
+        public SelectList? LeaveTypes { get; set; }
 
         [Display(Name = "Leave Type")]
         public int LeaveTypeId { get; set; }

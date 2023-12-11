@@ -1915,6 +1915,9 @@ namespace HR.LeaveManagement.Presentation.Services.Base
         [Newtonsoft.Json.JsonProperty("cancelled", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool Cancelled { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("requestingEmployeeId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string RequestingEmployeeId { get; set; }
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.0.0.0 (NJsonSchema v11.0.0.0 (Newtonsoft.Json v13.0.0.0))")]
