@@ -137,6 +137,8 @@ namespace HR.LeaveManagement.Presentation.Controllers
                 {
                     return RedirectToAction(nameof(Index));
                 }
+
+                ModelState.AddModelError(string.Empty, response.Message);
             }
 
             catch (Exception exception)

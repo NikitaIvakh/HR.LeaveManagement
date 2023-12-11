@@ -9,7 +9,7 @@ namespace HR.LeaveManagement.Application.DTOs.LeaveAllLocation
 
         public LeaveTypeDto LeaveType { get; set; }
 
-        public int LeaveTypeId { get; set; }
+        public string EmployeeId { get; set; }
 
         public int Period { get; set; }
     }

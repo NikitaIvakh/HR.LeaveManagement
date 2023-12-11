@@ -1,18 +1,11 @@
 ﻿using HR.LeaveManagement.Domain;
-using HR.LeaveManagement.Domain.Common;
 using Microsoft.EntityFrameworkCore;
 
 namespace HR.LeaveManagement.Persistence
 {
-    public class HRLeaveManagementDbContext : DbContext
+    public class HRLeaveManagementDbContext : AuditableDbContext
     {
         public HRLeaveManagementDbContext(DbContextOptions<HRLeaveManagementDbContext> options) : base(options) { }
-
-        public DbSet<LeaveRequest> LeaveRequests { get; set; }
-
-        public DbSet<LeaveType> LeaveTypes { get; set; }
-
-        public DbSet<LeaveAllLocation> LeaveAllLocations { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -20,19 +13,10 @@ namespace HR.LeaveManagement.Persistence
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(HRLeaveManagementDbContext).Assembly);
         }
 
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
-        {
-            foreach (var entry in ChangeTracker.Entries<BaseDomainEntity>())
-            {
-                entry.Entity.LastModifiedDate = DateTime.Now;
+        public DbSet<LeaveRequest> LeaveRequests { get; set; }
 
-                if (entry.State is EntityState.Added)
-                {
-                    entry.Entity.DateCreated = DateTime.Now;
-                }
-            }
+        public DbSet<LeaveType> LeaveTypes { get; set; }
 
-            return base.SaveChangesAsync(cancellationToken);
-        }
+        public DbSet<LeaveAllLocation> LeaveAllLocations { get; set; }
     }
 }

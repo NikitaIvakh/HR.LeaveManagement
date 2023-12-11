@@ -56,17 +56,16 @@ namespace HR.LeaveManagement.Application.Features.LeaveAllLocations.Handlers.Com
                         NumbersOfDays = leaveType.DefaultDays,
                         Period = period,
                     });
+
                 }
 
                 await _leaveAllLocationRepository.AddLocation(allLocations);
+                var leaveAllLocation = _mapper.Map<LeaveAllLocation>(request.LeaveAllLocationDto);
+
+                response.Success = true;
+                response.Message = "Allocations Successful";
+                response.Id = leaveAllLocation.Id;
             }
-
-            var leaveAllLocation = _mapper.Map<LeaveAllLocation>(request.LeaveAllLocationDto);
-            leaveAllLocation = await _leaveAllLocationRepository.CreateAsync(leaveAllLocation);
-
-            response.Success = true;
-            response.Message = "Creation Successful";
-            response.Id = leaveAllLocation.Id;
 
             return response;
         }
