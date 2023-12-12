@@ -5,6 +5,6 @@ namespace HR.LeaveManagement.Application.Features.LeaveAllLocations.Requests.Que
 {
     public class GetLeaveAllLocationListRequest : IRequest<List<LeaveAllLocationDto>>
     {
-
+        public bool IsLoggedInUser { get; set; }
     }
 }

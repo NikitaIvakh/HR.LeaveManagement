@@ -8,6 +8,8 @@ namespace HR.LeaveManagement.Application.Contracts.Persistence
 
         Task<List<LeaveAllLocation>> GetAllLocationsWithDetails();
 
+        Task<List<LeaveAllLocation>> GetAllLocationsWithDetails(string userId);
+
         Task<bool> AllLocationExists(string userId, int leaveTypeId, int period);
 
         Task AddLocation(List<LeaveAllLocation> leaveAllLocations);

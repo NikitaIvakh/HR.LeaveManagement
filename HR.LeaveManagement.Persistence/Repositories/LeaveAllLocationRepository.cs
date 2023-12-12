@@ -19,6 +19,12 @@ namespace HR.LeaveManagement.Persistence.Repositories
             return leaveAllLocations;
         }
 
+        public async Task<List<LeaveAllLocation>> GetAllLocationsWithDetails(string userId)
+        {
+            var leaveAllLocations = await _context.LeaveAllLocations.Where(key => key.EmployeeId == userId).Include(key => key.LeaveType).ToListAsync();
+            return leaveAllLocations;
+        }
+
         public async Task<LeaveAllLocation> GetLeaveAllLocationWithDetails(int id)
         {
             var leaveAllLocation = await _context.LeaveAllLocations.Include(key => key.LeaveType).FirstAsync(key => key.Id == id);
