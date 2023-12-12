@@ -17,14 +17,18 @@ namespace HR.LeaveManagement.Application.Profiles
             CreateMap<LeaveRequest, UpdateLeaveRequestDto>().ReverseMap();
             #endregion LeaveRequest
 
+            #region LeaveAllLocation Mappings
             CreateMap<LeaveAllLocation, LeaveAllLocationDto>().ReverseMap();
             CreateMap<LeaveAllLocation, CreateLeaveAllLocationDto>().ReverseMap();
             CreateMap<LeaveAllLocation, UpdateLeaveAllLocationDto>().ReverseMap();
+            #endregion
 
+            #region LeaveType Mappings
             CreateMap<LeaveType, LeaveTypeDto>().ReverseMap();
             CreateMap<LeaveType, CreateLeaveTypeDto>().ReverseMap();
             CreateMap<LeaveType, UpdateLeaveTypesDto>().ReverseMap();
             CreateMap<LeaveType, DeleteLeaveTypeDto>().ReverseMap();
+            #endregion
         }
     }
 }
