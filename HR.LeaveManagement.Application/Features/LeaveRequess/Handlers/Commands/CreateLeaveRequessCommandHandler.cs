@@ -9,9 +9,9 @@ using HR.LeaveManagement.Application.Contracts.Infrastructure;
 using HR.LeaveManagement.Application.Models;
 using HR.LeaveManagement.Application.Exceptions;
 using Microsoft.AspNetCore.Http;
-using System.IdentityModel.Tokens.Jwt;
 using FluentValidation.Results;
 using System.Security.Claims;
+using HR.LeaveManagement.Application.Constants;
 
 namespace HR.LeaveManagement.Application.Features.LeaveRequess.Handlers.Commands
 {
@@ -40,7 +40,7 @@ namespace HR.LeaveManagement.Application.Features.LeaveRequess.Handlers.Commands
             var response = new BaseCommandResponse();
             var validator = new CreateLeaveRequestDtoValidator(_leaveTypeRepository);
             var validatorResult = await validator.ValidateAsync(request.LeaveRequestDto, cancellationToken);
-            var userId = _httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(key => key.Type == "uid")?.Value;
+            var userId = _httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(key => key.Type == CustomClaimTypes.Uid)?.Value;
 
             var leaveAllLocation = await _leaveAllLocationRepository.GetUserAllLocationsAsync(userId, request.LeaveRequestDto.LeaveTypeId);
 
