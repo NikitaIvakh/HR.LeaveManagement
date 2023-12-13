@@ -5,8 +5,16 @@ namespace HR.LeaveManagement.Presentation.Contracts
 {
     public interface ILeaveRequestService
     {
+        Task<AdminLeaveRequestViewVM> GetAdminLeaveRequestViewViewModelAsync();
+
+        Task<EmployeeLeaveRequestViewVM> GetEmployeeLeaveRequestViewViewModelAsync();
+
         Task<BaseResponse<int>> CreateLeaveRequestAsync(CreateRequestViewModel createRequestViewModel);
 
-        Task<BaseResponse<int>> DeleteLeaveRequest(int id);
+        Task<LeaveRequestViewModel> GetLeaveRequestAsync(int id);
+
+        Task<BaseResponse<int>> DeleteLeaveRequestAsync(int id);
+
+        Task ApproveLeaveRequestAsync(int id, bool approved);
     }
 }

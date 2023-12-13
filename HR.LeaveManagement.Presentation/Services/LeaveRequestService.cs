@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HR.LeaveManagement.Presentation.Contracts;
+using HR.LeaveManagement.Presentation.Models.LeaveAllLocations;
 using HR.LeaveManagement.Presentation.Models.LeaveRequests;
 using HR.LeaveManagement.Presentation.Services.Base;
 
@@ -16,6 +17,37 @@ namespace HR.LeaveManagement.Presentation.Services
             _localStorageService = localStorageService;
             _httpClient = httpClient;
             _mapper = mapper;
+        }
+
+        public async Task<AdminLeaveRequestViewVM> GetAdminLeaveRequestViewViewModelAsync()
+        {
+            AddBearerToken();
+            var leaveRequest = await _client.LeaveRequestsAllAsync(isLoggedInUser: false);
+
+            var adminLeaveRequestViewVM = new AdminLeaveRequestViewVM
+            {
+                ApprovedRequests = leaveRequest.Count(key => key.Approved == true),
+                PendingRequests = leaveRequest.Count(key => key.Approved == null),
+                RejectedRequests = leaveRequest.Count(key => key.Approved == false),
+                LeaveRequests = _mapper.Map<List<LeaveRequestViewModel>>(leaveRequest),
+            };
+
+            return adminLeaveRequestViewVM;
+        }
+
+        public async Task<EmployeeLeaveRequestViewVM> GetEmployeeLeaveRequestViewViewModelAsync()
+        {
+            AddBearerToken();
+            var leaveRequest = await _client.LeaveRequestsAllAsync(isLoggedInUser: false);
+            var leaveAllLocation = await _client.LeaveAllLocationsAllAsync(isLoggedInUser: false);
+
+            var employeeLeaveRequestViewVM = new EmployeeLeaveRequestViewVM
+            {
+                LeaveRequests = _mapper.Map<List<LeaveRequestViewModel>>(leaveRequest),
+                LeaveAllocations = _mapper.Map<List<LeaveAllocationViewModel>>(leaveAllLocation)
+            };
+
+            return employeeLeaveRequestViewVM;
         }
 
         public async Task<BaseResponse<int>> CreateLeaveRequestAsync(CreateRequestViewModel createRequestViewModel)
@@ -50,7 +82,14 @@ namespace HR.LeaveManagement.Presentation.Services
             }
         }
 
-        public async Task<BaseResponse<int>> DeleteLeaveRequest(int id)
+        public async Task<LeaveRequestViewModel> GetLeaveRequestAsync(int id)
+        {
+            AddBearerToken();
+            var leaveRequest = await _client.LeaveRequestsGETAsync(id);
+            return _mapper.Map<LeaveRequestViewModel>(leaveRequest);
+        }
+
+        public async Task<BaseResponse<int>> DeleteLeaveRequestAsync(int id)
         {
             try
             {
@@ -62,6 +101,21 @@ namespace HR.LeaveManagement.Presentation.Services
             catch (ApiException apiException)
             {
                 return ConvertApiExceptions<int>(apiException);
+            }
+        }
+
+        public async Task ApproveLeaveRequestAsync(int id, bool approved)
+        {
+            AddBearerToken();
+            try
+            {
+                var approveStatus = new ChangeLeaveRequestApplovalDto { Id = id, Approved = approved };
+                await _client.ChangeapprovalAsync(id, approveStatus);
+            }
+
+            catch
+            {
+                throw;
             }
         }
     }
