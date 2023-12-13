@@ -24,9 +24,9 @@ namespace HR.LeaveManagement.API.Controllers
 
         // GET: api/<LeaveAllLocationsController>
         [HttpGet]
-        public async Task<ActionResult<List<LeaveAllLocationDto>>> Get()
+        public async Task<ActionResult<List<LeaveAllLocationDto>>> Get(bool IsLoggedInUser = false)
         {
-            List<LeaveAllLocationDto> leaveAllLocations = await _mediator.Send(new GetLeaveAllLocationListRequest());
+            List<LeaveAllLocationDto> leaveAllLocations = await _mediator.Send(new GetLeaveAllLocationListRequest { IsLoggedInUser = IsLoggedInUser });
             return Ok(leaveAllLocations);
         }
 
