@@ -3,19 +3,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HR.LeaveManagement.Presentation.Models.LeaveAllLocations
 {
-    public class LeaveAllocationViewModel
+    public class UpdateLeaveAllocationViewModel
     {
         public int Id { get; set; }
 
         [Display(Name = "Number Of Days")]
+        [Range(1, 50, ErrorMessage = "Enter Valid Number")]
         public int NumberOfDays { get; set; }
 
-        public DateTime DateCreated { get; set; }
-
-        public int Period { get; set; }
-
         public LeaveTypeViewModel LeaveType { get; set; }
-
-        public int LeaveTypeId { get; set; }
     }
 }
