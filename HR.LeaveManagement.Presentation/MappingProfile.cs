@@ -32,9 +32,9 @@ namespace HR.LeaveManagement.Presentation
 
             #region LeaveAllLocationDto Mapping
             CreateMap<LeaveAllLocationDto, LeaveAllocationViewModel>().ReverseMap();
-            CreateMap<CreateLeaveAllLocationDto, CreateLeaveTypeViewModel>().ReverseMap();
-            CreateMap<UpdateLeaveTypesDto, UpdateLeaveTypeViewModel>().ReverseMap();
-            CreateMap<DeleteLeaveTypeDto, DeleteLeaveTypeViewModel>().ReverseMap();
+            CreateMap<CreateLeaveAllLocationDto, CreateLeaveAllocationViewModel>().ReverseMap();
+            CreateMap<UpdateLeaveAllLocationDto, UpdateLeaveAllocationViewModel>().ReverseMap();
+            CreateMap<LeaveAllLocationDto, ViewLeaveAllocationsViewModel>().ReverseMap();
             #endregion
 
             CreateMap<RegisterViewModel, RegistrationRequest>().ReverseMap();
