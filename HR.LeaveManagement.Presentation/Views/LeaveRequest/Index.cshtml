@@ -77,22 +77,22 @@
                         @{
                             if (item.Cancelled)
                             {
-                                <span class="badge badge-secondary">Cancelled</span>
+                                <span class="btn btn-secondary">Cancelled</span>
                             }
 
                             else if (item.Approved is true)
                             {
-                                <span class="badge badge-success">Approved</span>
+                                <span class="btn btn-success">Approved</span>
                             }
 
                             else if (item.Approved is false)
                             {
-                                <span class="badge badge-danger">Rejected</span>
+                                <span class="btn btn-danger">Rejected</span>
                             }
 
                             else
                             {
-                                <span class="badge badge-warning">Pending Approval</span>
+                                <span class="btn btn-warning">Pending Approval</span>
                             }
                         }
                     </td>

@@ -21,13 +21,13 @@ namespace HR.LeaveManagement.Presentation
             #region LeaveRequestDto Mapping
             CreateMap<CreateLeaveRequestDto, CreateRequestViewModel>().ReverseMap();
             CreateMap<LeaveRequestDto, LeaveRequestViewModel>()
-                .ForMember(q => q.DateRequested, opt => opt.MapFrom(x => x.DateRequest.DateTime))
-                .ForMember(q => q.StartDate, opt => opt.MapFrom(x => x.StartDate.DateTime))
-                .ForMember(q => q.EndDate, opt => opt.MapFrom(x => x.EndDate.DateTime)).ReverseMap();
+                .ForMember(q => q.DateRequested, opt => opt.MapFrom(x => x.DateRequest.Date))
+                .ForMember(q => q.StartDate, opt => opt.MapFrom(x => x.StartDate.Date))
+                .ForMember(q => q.EndDate, opt => opt.MapFrom(x => x.EndDate.Date)).ReverseMap();
             CreateMap<LeaveRequestListDto, LeaveRequestViewModel>()
-                .ForMember(key => key.DateRequested, opt => opt.MapFrom(key => key.DateRequest.DateTime))
-                .ForMember(key => key.StartDate, opt => opt.MapFrom(key => key.StartDate.DateTime))
-                .ForMember(key => key.EndDate, opt => opt.MapFrom(key => key.EndDate.DateTime)).ReverseMap();
+                .ForMember(key => key.DateRequested, opt => opt.MapFrom(key => key.DateRequest.Date))
+                .ForMember(key => key.StartDate, opt => opt.MapFrom(key => key.StartDate.Date))
+                .ForMember(key => key.EndDate, opt => opt.MapFrom(key => key.EndDate.Date)).ReverseMap();
             #endregion
 
             #region LeaveAllLocationDto Mapping
