@@ -1,4 +1,5 @@
-﻿using HR.LeaveManagement.Presentation.Contracts;
+﻿using AutoMapper;
+using HR.LeaveManagement.Presentation.Contracts;
 using HR.LeaveManagement.Presentation.Models.LeaveRequests;
 using HR.LeaveManagement.Presentation.Models.LeaveTypes;
 using HR.LeaveManagement.Presentation.Services.Base;
@@ -13,11 +14,28 @@ namespace HR.LeaveManagement.Presentation.Controllers
     {
         private readonly ILeaveTypeService _leaveTypeService;
         private readonly ILeaveRequestService _leaveRequestService;
+        private readonly IMapper _mapper;
 
-        public LeaveRequestController(ILeaveTypeService leaveTypeService, ILeaveRequestService leaveRequestService)
+        public LeaveRequestController(ILeaveTypeService leaveTypeService, ILeaveRequestService leaveRequestService, IMapper mapper)
         {
             _leaveTypeService = leaveTypeService;
             _leaveRequestService = leaveRequestService;
+            _mapper = mapper;
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Administrator")]
+        public async Task<ActionResult> Index()
+        {
+            AdminLeaveRequestViewVM adminLeaveRequestViewVM = await _leaveRequestService.GetAdminLeaveRequestViewViewModelAsync();
+            return View(adminLeaveRequestViewVM);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Details(int id)
+        {
+            LeaveRequestViewModel leaveRequest = await _leaveRequestService.GetLeaveRequestAsync(id);
+            return View(leaveRequest);
         }
 
         [HttpGet]
@@ -53,6 +71,23 @@ namespace HR.LeaveManagement.Presentation.Controllers
             createRequestViewModel.LeaveTypes = leaveTypeItems;
 
             return View(createRequestViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
+        public async Task<ActionResult> ApproveRequest(int id, bool approved)
+        {
+            try
+            {
+                await _leaveRequestService.ApproveLeaveRequestAsync(id, approved);
+                return RedirectToAction(nameof(Index));
+            }
+
+            catch
+            {
+                return RedirectToAction(nameof(Index));
+            }
         }
     }
 }
