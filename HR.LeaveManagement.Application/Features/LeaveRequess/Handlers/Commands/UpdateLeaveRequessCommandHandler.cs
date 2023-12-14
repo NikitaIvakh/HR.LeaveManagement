@@ -48,7 +48,7 @@ namespace HR.LeaveManagement.Application.Features.LeaveRequess.Handlers.Commands
                 if (request.ChangeLeaveRequestApploval.Approved)
                 {
                     var allLocation = await _leaveAllLocationRepository.GetUserAllLocationsAsync(leaveRequest.RequestingEmployeeId, leaveRequest.LeaveTypeId);
-                    int daysRequested = (int)(request.LeaveRequest.EndDate - request.LeaveRequest.StartDate).TotalDays;
+                    int daysRequested = (int)(leaveRequest.EndDate - leaveRequest.StartDate).TotalDays;
 
                     allLocation.NumbersOfDays -= daysRequested;
                     await _leaveAllLocationRepository.UpdateAsync(allLocation);
