@@ -11,13 +11,13 @@ namespace HR.LeaveManagement.Application.Features.LeaveTypes.Handlers.Commands
 {
     public class DeleteLeaveTypeCommandHandler : IRequestHandler<DeleteLeaveTypeCommand, BaseCommandResponse>
     {
-        private readonly ILeaveTypeRepository _leaveTypeRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public DeleteLeaveTypeCommandHandler(ILeaveTypeRepository leaveTypeRepository, IMapper mapper)
+        public DeleteLeaveTypeCommandHandler(IMapper mapper, IUnitOfWork unitOfWork)
         {
-            _leaveTypeRepository = leaveTypeRepository;
             _mapper = mapper;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<BaseCommandResponse> Handle(DeleteLeaveTypeCommand request, CancellationToken cancellationToken)
@@ -35,11 +35,12 @@ namespace HR.LeaveManagement.Application.Features.LeaveTypes.Handlers.Commands
 
             else
             {
-                var leaveType = await _leaveTypeRepository.GetAsync(request.DeleteLeaveTypeDto.Id)
+                var leaveType = await _unitOfWork.LeaveTypeRepository.GetAsync(request.DeleteLeaveTypeDto.Id)
                     ?? throw new NotFoundException(nameof(LeaveType), request.DeleteLeaveTypeDto.Id);
 
                 _mapper.Map(request.DeleteLeaveTypeDto, leaveType);
-                await _leaveTypeRepository.DeleteAsync(leaveType);
+                await _unitOfWork.LeaveTypeRepository.DeleteAsync(leaveType);
+                await _unitOfWork.Save();
 
                 response.Success = true;
                 response.Message = "Delete Successful";
