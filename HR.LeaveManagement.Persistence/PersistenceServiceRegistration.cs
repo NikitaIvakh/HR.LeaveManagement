@@ -19,6 +19,7 @@ namespace HR.LeaveManagement.Persistence
             services.AddScoped<ILeaveTypeRepository, LeaveTypeRepository>();
             services.AddScoped<ILeaveRequestRepository, LeaveRequestRepository>();
             services.AddScoped<ILeaveAllLocationRepository, LeaveAllLocationRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             var serviceProvider = services.BuildServiceProvider();
             using (var scope = serviceProvider.CreateScope())
