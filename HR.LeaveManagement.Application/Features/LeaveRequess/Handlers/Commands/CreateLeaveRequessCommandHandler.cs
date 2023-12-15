@@ -17,32 +17,27 @@ namespace HR.LeaveManagement.Application.Features.LeaveRequess.Handlers.Commands
 {
     public class CreateLeaveRequessCommandHandler : IRequestHandler<CreateLeaveRequessCommand, BaseCommandResponse>
     {
-        private readonly ILeaveRequestRepository _leaveRequestRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly IEmailSender _emailSender;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly ILeaveAllLocationRepository _leaveAllLocationRepository;
-        private readonly ILeaveTypeRepository _leaveTypeRepository;
 
-        public CreateLeaveRequessCommandHandler(ILeaveRequestRepository leaveRequestRepository, IMapper mapper, IEmailSender emailSender,
-            IHttpContextAccessor httpContextAccessor, ILeaveAllLocationRepository leaveAllLocationRepository, ILeaveTypeRepository leaveTypeRepository)
+        public CreateLeaveRequessCommandHandler(IMapper mapper, IEmailSender emailSender, IHttpContextAccessor httpContextAccessor, IUnitOfWork unitOfWork)
         {
-            _leaveRequestRepository = leaveRequestRepository;
             _mapper = mapper;
             _emailSender = emailSender;
             _httpContextAccessor = httpContextAccessor;
-            _leaveAllLocationRepository = leaveAllLocationRepository;
-            _leaveTypeRepository = leaveTypeRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<BaseCommandResponse> Handle(CreateLeaveRequessCommand request, CancellationToken cancellationToken)
         {
             var response = new BaseCommandResponse();
-            var validator = new CreateLeaveRequestDtoValidator(_leaveTypeRepository);
+            var validator = new CreateLeaveRequestDtoValidator(_unitOfWork.LeaveTypeRepository);
             var validatorResult = await validator.ValidateAsync(request.LeaveRequestDto, cancellationToken);
             var userId = _httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(key => key.Type == CustomClaimTypes.Uid)?.Value;
 
-            var leaveAllLocation = await _leaveAllLocationRepository.GetUserAllLocationsAsync(userId, request.LeaveRequestDto.LeaveTypeId);
+            var leaveAllLocation = await _unitOfWork.LeaveAllLocationRepository.GetUserAllLocationsAsync(userId, request.LeaveRequestDto.LeaveTypeId);
 
             if (leaveAllLocation is null)
                 validatorResult.Errors.Add(new ValidationFailure(nameof(request.LeaveRequestDto.LeaveTypeId), "You do not have any allocations for this leave type"));
@@ -68,7 +63,8 @@ namespace HR.LeaveManagement.Application.Features.LeaveRequess.Handlers.Commands
             {
                 var leaveRequest = _mapper.Map<LeaveRequest>(request.LeaveRequestDto);
                 leaveRequest.RequestingEmployeeId = userId;
-                leaveRequest = await _leaveRequestRepository.CreateAsync(leaveRequest);
+                leaveRequest = await _unitOfWork.LeaveRequestRepository.CreateAsync(leaveRequest);
+                await _unitOfWork.Save();
 
                 response.Success = true;
                 response.Message = "Creation Successful";

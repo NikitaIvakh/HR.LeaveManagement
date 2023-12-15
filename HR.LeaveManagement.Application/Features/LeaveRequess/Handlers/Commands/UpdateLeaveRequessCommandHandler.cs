@@ -9,27 +9,22 @@ namespace HR.LeaveManagement.Application.Features.LeaveRequess.Handlers.Commands
 {
     public class UpdateLeaveRequessCommandHandler : IRequestHandler<UpdateLeaveRequessCommand, Unit>
     {
-        private readonly ILeaveRequestRepository _leaveRequestRepository;
-        private readonly ILeaveTypeRepository _leaveTypeRepository;
-        private readonly ILeaveAllLocationRepository _leaveAllLocationRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public UpdateLeaveRequessCommandHandler(ILeaveRequestRepository leaveRequestRepository, IMapper mapper,
-            ILeaveTypeRepository leaveTypeRepository, ILeaveAllLocationRepository leaveAllLocationRepository)
+        public UpdateLeaveRequessCommandHandler(IMapper mapper, IUnitOfWork unitOfWork)
         {
-            _leaveRequestRepository = leaveRequestRepository;
             _mapper = mapper;
-            _leaveTypeRepository = leaveTypeRepository;
-            _leaveAllLocationRepository = leaveAllLocationRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<Unit> Handle(UpdateLeaveRequessCommand request, CancellationToken cancellationToken)
         {
-            var leaveRequest = await _leaveRequestRepository.GetAsync(request.Id);
+            var leaveRequest = await _unitOfWork.LeaveRequestRepository.GetAsync(request.Id);
 
             if (request.LeaveRequest is not null)
             {
-                var validator = new UpdateLeaveRequestDtoValidator(_leaveTypeRepository);
+                var validator = new UpdateLeaveRequestDtoValidator(_unitOfWork.LeaveTypeRepository);
                 var validatorResult = await validator.ValidateAsync(request.LeaveRequest, cancellationToken);
 
                 if (validatorResult.IsValid is false)
@@ -38,20 +33,22 @@ namespace HR.LeaveManagement.Application.Features.LeaveRequess.Handlers.Commands
                 }
 
                 _mapper.Map(request.LeaveRequest, leaveRequest);
-                await _leaveRequestRepository.UpdateAsync(leaveRequest);
+                await _unitOfWork.LeaveRequestRepository.UpdateAsync(leaveRequest);
+                await _unitOfWork.Save();
             }
 
             else if (request.ChangeLeaveRequestApploval is not null)
             {
-                await _leaveRequestRepository.ChangeApprovalStatus(leaveRequest, request.ChangeLeaveRequestApploval.Approved);
+                await _unitOfWork.LeaveRequestRepository.ChangeApprovalStatus(leaveRequest, request.ChangeLeaveRequestApploval.Approved);
 
                 if (request.ChangeLeaveRequestApploval.Approved)
                 {
-                    var allLocation = await _leaveAllLocationRepository.GetUserAllLocationsAsync(leaveRequest.RequestingEmployeeId, leaveRequest.LeaveTypeId);
+                    var allLocation = await _unitOfWork.LeaveAllLocationRepository.GetUserAllLocationsAsync(leaveRequest.RequestingEmployeeId, leaveRequest.LeaveTypeId);
                     int daysRequested = (int)(leaveRequest.EndDate - leaveRequest.StartDate).TotalDays;
 
                     allLocation.NumbersOfDays -= daysRequested;
-                    await _leaveAllLocationRepository.UpdateAsync(allLocation);
+                    await _unitOfWork.LeaveAllLocationRepository.UpdateAsync(allLocation);
+                    await _unitOfWork.Save();
                 }
             }
 
