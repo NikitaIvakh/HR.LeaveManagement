@@ -12,18 +12,17 @@ namespace HR.LeaveManagement.Application.Features.LeaveAllLocations.Handlers.Que
 {
     public class GetLeaveAllLocationListRequestHandler : IRequestHandler<GetLeaveAllLocationListRequest, List<LeaveAllLocationDto>>
     {
-        private readonly ILeaveAllLocationRepository _leaveAllLocationRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly IHttpContextAccessor _contextAccessor;
         private readonly IUserService _userService;
 
-        public GetLeaveAllLocationListRequestHandler(ILeaveAllLocationRepository leaveAllLocationRepository, IMapper mapper,
-            IHttpContextAccessor contextAccessor, IUserService userService)
+        public GetLeaveAllLocationListRequestHandler(IMapper mapper, IHttpContextAccessor contextAccessor, IUserService userService, IUnitOfWork unitOfWork)
         {
-            _leaveAllLocationRepository = leaveAllLocationRepository;
             _mapper = mapper;
             _contextAccessor = contextAccessor;
             _userService = userService;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<List<LeaveAllLocationDto>> Handle(GetLeaveAllLocationListRequest request, CancellationToken cancellationToken)
@@ -34,7 +33,7 @@ namespace HR.LeaveManagement.Application.Features.LeaveAllLocations.Handlers.Que
             if (request.IsLoggedInUser)
             {
                 var userId = _contextAccessor.HttpContext.User.FindFirst(key => key.Type == CustomClaimTypes.Uid)?.Value;
-                leaveAllLocations = await _leaveAllLocationRepository.GetAllLocationsWithDetails(userId);
+                leaveAllLocations = await _unitOfWork.LeaveAllLocationRepository.GetAllLocationsWithDetails(userId);
 
                 var employee = await _userService.GetEmployeeAsync(userId);
                 allLocations = _mapper.Map<List<LeaveAllLocationDto>>(leaveAllLocations);
@@ -47,7 +46,7 @@ namespace HR.LeaveManagement.Application.Features.LeaveAllLocations.Handlers.Que
 
             else
             {
-                leaveAllLocations = await _leaveAllLocationRepository.GetAllLocationsWithDetails();
+                leaveAllLocations = await _unitOfWork.LeaveAllLocationRepository.GetAllLocationsWithDetails();
                 allLocations = _mapper.Map<List<LeaveAllLocationDto>>(leaveAllLocations);
 
                 foreach (var location in allLocations)

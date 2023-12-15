@@ -8,18 +8,18 @@ namespace HR.LeaveManagement.Application.Features.LeaveAllLocations.Handlers.Que
 {
     public class GetLeaveAllLocationDetailsRequestHandler : IRequestHandler<GetLeaveAllLocationDetailsRequest, LeaveAllLocationDto>
     {
-        private readonly ILeaveAllLocationRepository _leaveAllLocationRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public GetLeaveAllLocationDetailsRequestHandler(ILeaveAllLocationRepository leaveRequestRepository, IMapper mapper)
+        public GetLeaveAllLocationDetailsRequestHandler(IMapper mapper, IUnitOfWork unitOfWork)
         {
-            _leaveAllLocationRepository = leaveRequestRepository;
             _mapper = mapper;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<LeaveAllLocationDto> Handle(GetLeaveAllLocationDetailsRequest request, CancellationToken cancellationToken)
         {
-            var leaveAllLocations = await _leaveAllLocationRepository.GetLeaveAllLocationWithDetails(request.Id);
+            var leaveAllLocations = await _unitOfWork.LeaveAllLocationRepository.GetLeaveAllLocationWithDetails(request.Id);
             return _mapper.Map<LeaveAllLocationDto>(leaveAllLocations);
         }
     }
