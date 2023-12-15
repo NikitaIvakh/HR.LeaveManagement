@@ -11,23 +11,19 @@ namespace HR.LeaveManagement.Application.Features.LeaveAllLocations.Handlers.Com
 {
     public class CreateLeaveAllLocationsCommandHandler : IRequestHandler<CreateLeaveAllLocationsCommand, BaseCommandResponse>
     {
-        private readonly ILeaveAllLocationRepository _leaveAllLocationRepository;
-        private readonly ILeaveTypeRepository _leaveTypeRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IUserService _userService;
-        private readonly IMapper _mapper;
 
-        public CreateLeaveAllLocationsCommandHandler(ILeaveAllLocationRepository leaveAllLocationRepository, IMapper mapper, IUserService userService, ILeaveTypeRepository leaveTypeRepository)
+        public CreateLeaveAllLocationsCommandHandler(IUserService userService, IUnitOfWork unitOfWork)
         {
-            _leaveAllLocationRepository = leaveAllLocationRepository;
-            _mapper = mapper;
+            _unitOfWork = unitOfWork;
             _userService = userService;
-            _leaveTypeRepository = leaveTypeRepository;
         }
 
         public async Task<BaseCommandResponse> Handle(CreateLeaveAllLocationsCommand request, CancellationToken cancellationToken)
         {
             var response = new BaseCommandResponse();
-            var validator = new CreateLeaveAllLocationDtoValidator(_leaveTypeRepository);
+            var validator = new CreateLeaveAllLocationDtoValidator(_unitOfWork.LeaveTypeRepository);
             var validationResult = await validator.ValidateAsync(request.LeaveAllLocationDto, cancellationToken);
 
             if (validationResult.IsValid is false)
@@ -39,14 +35,14 @@ namespace HR.LeaveManagement.Application.Features.LeaveAllLocations.Handlers.Com
 
             else
             {
-                var leaveType = await _leaveTypeRepository.GetAsync(request.LeaveAllLocationDto.LeaveTypeId);
+                var leaveType = await _unitOfWork.LeaveTypeRepository.GetAsync(request.LeaveAllLocationDto.LeaveTypeId);
                 var employees = await _userService.GetEmployeesAsync();
                 var period = DateTime.Now.Year;
                 var allLocations = new List<LeaveAllLocation>();
 
                 foreach (var employee in employees)
                 {
-                    if (await _leaveAllLocationRepository.AllLocationExists(employee.Id, leaveType.Id, period))
+                    if (await _unitOfWork.LeaveAllLocationRepository.AllLocationExists(employee.Id, leaveType.Id, period))
                         continue;
 
                     allLocations.Add(new LeaveAllLocation
@@ -59,12 +55,11 @@ namespace HR.LeaveManagement.Application.Features.LeaveAllLocations.Handlers.Com
 
                 }
 
-                await _leaveAllLocationRepository.AddLocation(allLocations);
-                var leaveAllLocation = _mapper.Map<LeaveAllLocation>(request.LeaveAllLocationDto);
+                await _unitOfWork.LeaveAllLocationRepository.AddLocation(allLocations);
+                await _unitOfWork.Save();
 
                 response.Success = true;
                 response.Message = "Allocations Successful";
-                response.Id = leaveAllLocation.Id;
             }
 
             return response;

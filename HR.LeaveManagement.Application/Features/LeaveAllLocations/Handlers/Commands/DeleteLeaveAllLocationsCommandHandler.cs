@@ -8,19 +8,21 @@ namespace HR.LeaveManagement.Application.Features.LeaveAllLocations.Handlers.Com
 {
     public class DeleteLeaveAllLocationsCommandHandler : IRequestHandler<DeleteLeaveAllLocationsCommand, Unit>
     {
-        private readonly ILeaveAllLocationRepository _leaveAllLocationRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public DeleteLeaveAllLocationsCommandHandler(ILeaveAllLocationRepository leaveAllLocationRepository)
+        public DeleteLeaveAllLocationsCommandHandler(IUnitOfWork unitOfWork)
         {
-            _leaveAllLocationRepository = leaveAllLocationRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<Unit> Handle(DeleteLeaveAllLocationsCommand request, CancellationToken cancellationToken)
         {
-            var leaveAllLocation = await _leaveAllLocationRepository.GetAsync(request.Id) 
+            var leaveAllLocation = await _unitOfWork.LeaveAllLocationRepository.GetAsync(request.Id)
                 ?? throw new NotFoundException(nameof(LeaveAllLocation), request.Id);
 
-            await _leaveAllLocationRepository.DeleteAsync(leaveAllLocation);
+            await _unitOfWork.LeaveAllLocationRepository.DeleteAsync(leaveAllLocation);
+            await _unitOfWork.Save();
+
             return Unit.Value;
         }
     }

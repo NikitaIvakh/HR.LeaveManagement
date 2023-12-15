@@ -10,30 +10,29 @@ namespace HR.LeaveManagement.Application.Features.LeaveAllLocations.Handlers.Com
 {
     public class UpdateLeaveAllLocationsCommandHandler : IRequestHandler<UpdateLeaveAllLocationsCommand, Unit>
     {
-        private readonly ILeaveAllLocationRepository _leaveAllLocationRepository;
-        private readonly ILeaveTypeRepository _leaveTypeRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public UpdateLeaveAllLocationsCommandHandler(ILeaveAllLocationRepository leaveAllLocationRepository, ILeaveTypeRepository leaveTypeRepository, IMapper mapper)
+        public UpdateLeaveAllLocationsCommandHandler(IMapper mapper, IUnitOfWork unitOfWork)
         {
-            _leaveAllLocationRepository = leaveAllLocationRepository;
-            _leaveTypeRepository = leaveTypeRepository;
             _mapper = mapper;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<Unit> Handle(UpdateLeaveAllLocationsCommand request, CancellationToken cancellationToken)
         {
-            var validator = new UpdateLeaveAllLocationDtoValidator(_leaveTypeRepository);
+            var validator = new UpdateLeaveAllLocationDtoValidator(_unitOfWork.LeaveTypeRepository);
             var validatorResult = await validator.ValidateAsync(request.LeaveAllLocationDto, cancellationToken);
 
             if (validatorResult.IsValid is false)
                 throw new ValidationException(validatorResult);
 
-            var leaveAllLocation = await _leaveAllLocationRepository.GetAsync(request.LeaveAllLocationDto.Id)
+            var leaveAllLocation = await _unitOfWork.LeaveAllLocationRepository.GetAsync(request.LeaveAllLocationDto.Id)
                 ?? throw new NotFoundException(nameof(LeaveAllLocation), request.LeaveAllLocationDto.Id);
 
             _mapper.Map(request.LeaveAllLocationDto, leaveAllLocation);
-            await _leaveAllLocationRepository.UpdateAsync(leaveAllLocation);
+            await _unitOfWork.LeaveAllLocationRepository.UpdateAsync(leaveAllLocation);
+            await _unitOfWork.Save();
 
             return Unit.Value;
         }
