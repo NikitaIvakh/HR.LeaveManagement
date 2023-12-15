@@ -48,8 +48,9 @@ namespace HR.LeaveManagement.Application.Features.LeaveRequess.Handlers.Commands
 
                     allLocation.NumbersOfDays -= daysRequested;
                     await _unitOfWork.LeaveAllLocationRepository.UpdateAsync(allLocation);
-                    await _unitOfWork.Save();
                 }
+
+                await _unitOfWork.Save();
             }
 
             return Unit.Value;
