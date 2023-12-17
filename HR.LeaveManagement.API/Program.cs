@@ -1,3 +1,4 @@
+using HR.LeaveManagement.API.Middleware;
 using HR.LeaveManagement.Application;
 using HR.LeaveManagement.Identity;
 using HR.LeaveManagement.Infrastructure;
@@ -35,6 +36,7 @@ if (webApplication.Environment.IsDevelopment())
     webApplication.UseDeveloperExceptionPage();
 }
 
+webApplication.UseMiddleware<ExceptionMiddleware>();
 webApplication.UseAuthentication();
 webApplication.UseSwagger();
 webApplication.UseSwaggerUI(key => key.SwaggerEndpoint("/swagger/v1/swagger.json", "HR LeaveManagement API"));
