@@ -30,7 +30,7 @@ namespace HR.LeaveManagement.API.Middleware
         {
             context.Response.ContentType = "application/json";
             HttpStatusCode statusCode = HttpStatusCode.InternalServerError;
-            string result = JsonConvert.SerializeObject(new { error = exception.Message });
+            string result = JsonConvert.SerializeObject(new ErrorDetails { ErrorType = "Failure", ErrorMessage = exception.Message });
 
             switch (exception)
             {
