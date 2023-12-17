@@ -48,6 +48,13 @@ namespace HR.LeaveManagement.Identity
                 }
             );
 
+            var serviceProvider = services.BuildServiceProvider();
+            using (var scope = serviceProvider.CreateScope())
+            {
+                var dbContext = scope.ServiceProvider.GetRequiredService<HRLeaveManagementIdentityDbContext>();
+                dbContext.Database.Migrate();
+            }
+
             return services;
         }
     }
